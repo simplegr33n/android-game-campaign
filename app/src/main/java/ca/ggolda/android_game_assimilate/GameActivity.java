@@ -377,7 +377,7 @@ public class GameActivity extends AppCompatActivity {
         o15 = (ImageView) findViewById(R.id.tile_239);
         p15 = (ImageView) findViewById(R.id.tile_240);
 
-        p16 = (ImageView) findViewById(R.id.tile_241);
+        a16 = (ImageView) findViewById(R.id.tile_241);
         b16 = (ImageView) findViewById(R.id.tile_242);
         c16 = (ImageView) findViewById(R.id.tile_243);
         d16 = (ImageView) findViewById(R.id.tile_244);
