@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
@@ -113,11 +115,45 @@ public class GameActivity extends AppCompatActivity {
             }
         };
 
+        // Get boardset String from firebase
+        // set board
+        mGamesDatabaseReference.child(match_id).child("board").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.e("YOYOYO", ""+dataSnapshot.getValue());
 
+                boardsetString = dataSnapshot.getValue(String.class);
 
-        // TODO: get board
-        // if reference null, set to new board from string file
-        declareBoard();
+                // Ground
+                // IF boardsetString null or "", create new random board (ground)
+                if ((boardsetString == null) || (boardsetString.equals("null")) || (boardsetString.equals(""))) {
+                    boardsetString = "";
+
+                    for (int i =0; i < 256; i++) {
+
+                        Random r = new Random();
+                        int tempInt = r.nextInt(17 - 1) + 1;
+                        String tempString = String.valueOf(tempInt);
+
+                        boardsetString += "" + tempString + ",";
+                        Log.e("VALUES", boardsetString);
+                    }
+                    mGamesDatabaseReference.child(match_id).child("board").setValue(boardsetString);
+
+                    declareBoard();
+                } else {
+                    declareBoard();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+
+        });
+
 
     }
 
@@ -405,25 +441,6 @@ public class GameActivity extends AppCompatActivity {
         clearSelected();
 
 
-        // Ground
-        // IF boardsetString null or "", create new random board (ground)
-        if ((boardsetString.equals("")) || (boardsetString == null)) {
-            for (int i =0; i < 256; i++) {
-
-                Random r = new Random();
-                int tempInt = r.nextInt(17 - 1) + 1;
-                String tempString = String.valueOf(tempInt);
-
-
-
-                boardsetString += "" + tempString + ",";
-                Log.e("VALUES", boardsetString);
-            }
-
-        }
-
-        mGamesDatabaseReference.child(match_id).child("board").setValue(boardsetString);
-
         boardsetList = Arrays.asList(boardsetString.split("\\s*,\\s*"));
 
 
@@ -440,7 +457,13 @@ public class GameActivity extends AppCompatActivity {
         //set board color based on boardsetList
         for (int i = 0; i < boardsetList.size(); i++) {
 
-            int color = getBackgroundColor(Integer.valueOf(boardsetList.get(i)));
+            int color;
+
+            if (!(boardsetList.get(i).equals(""))) {
+                color = Color.parseColor("#FFFFFF");
+            } else {
+                color = getBackgroundColor(Integer.valueOf(boardsetList.get(i)));
+            }
 
             if (getSquareImageView(i) != null ) {
                 getSquareImageView(i).setBackgroundColor(color);
@@ -458,9 +481,6 @@ public class GameActivity extends AppCompatActivity {
                         getSquareImageView(i).setBackgroundColor(Color.parseColor("#0000FF"));
 
                     }
-
-
-
                 }
             }
 
