@@ -1,4 +1,4 @@
-# Android Assimilate
+# <img src="https://github.com/simplegr33n/android-game-assimilate/blob/master/screenshots/logos/logo1.jpg" width="64"> Android Assimilate
 
 <hr>
 ## Screenshots
