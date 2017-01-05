@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -51,9 +52,6 @@ public class GameActivity extends AppCompatActivity {
     private List<String> boardsetList;
     private String boardsetString = "";
 
-    private int selectedSquare = 999;
-    private String unitEquiptment = "none";
-
     private float x1, x2;
     static final int MIN_DISTANCE = 150; //TODO: figure this one out
 
@@ -76,6 +74,8 @@ public class GameActivity extends AppCompatActivity {
     private String userId;
     public static String username;
     public static String playerColor;
+
+    private String unitEquiptment = "none";
 
     private static final int SWIPE_MIN_DISTANCE = 120;
     private static final int SWIPE_MAX_OFF_PATH = 250;
@@ -436,7 +436,7 @@ public class GameActivity extends AppCompatActivity {
         //set board color based on boardsetList
         for (int i = 0; i < boardsetList.size(); i++) {
 
-            int color = Color.parseColor(getBackgroundColor(Integer.valueOf(boardsetList.get(i))));
+            int color = getBackgroundColor(Integer.valueOf(boardsetList.get(i)));
 
             if (getSquareImageView(i) != null ) {
                 getSquareImageView(i).setBackgroundColor(color);
@@ -445,13 +445,13 @@ public class GameActivity extends AppCompatActivity {
                 if (!(gamesetList.get(i).equals("free_space"))) {
                     getSquareImageView(i).setImageResource(getResources().getIdentifier(gamesetList.get(i), "drawable", getPackageName()));
 
-                    if (gamesetList.get(i).equals("player_black")) {
-                        getSquareImageView(i).setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    if (gamesetList.get(i).equals("red_none")) {
+                        getSquareImageView(i).setBackgroundColor(Color.parseColor("#FF0000"));
 
                     }
 
-                    if (gamesetList.get(i).equals("player_white")) {
-                        getSquareImageView(i).setBackgroundColor(Color.parseColor("#000000"));
+                    if (gamesetList.get(i).equals("blue_none")) {
+                        getSquareImageView(i).setBackgroundColor(Color.parseColor("#0000FF"));
 
                     }
 
@@ -465,72 +465,67 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
-    private void returnSelectable(int square, final ImageView squareImageView) {
-
-    }
-
     private void clearSelected() {
 
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
+    private int getBackgroundColor(int c) {
 
-    }
+        int color = ContextCompat.getColor(GameActivity.this, R.color.boardColor1);
 
-    @Override
-    public void onPause() {
-        super.onPause();
-
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-
-
-    }
-
-    // Swipe functionality for movement
-    // TODO: all directions
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                x1 = event.getX();
+        switch(c) {
+            case 1:
+                color = ContextCompat.getColor(GameActivity.this, R.color.boardColor1);
                 break;
-            case MotionEvent.ACTION_UP:
-                x2 = event.getX();
-                float deltaX = x2 - x1;
-
-                if (Math.abs(deltaX) > MIN_DISTANCE) {
-                    // Left to Right swipe action
-                    if (x2 > x1) {
-
-                        //TODO:
-                        Log.e("MOVED", "LEFT");
-
-                    }
-
-                    // Right to left swipe action
-                    else if (x2 < x1) {
-
-                        //TODO:
-                        Log.e("MOVED", "LEFT");
-
-                        }
-                    } else {
-
-                    //TODO:
-                    Log.e("MOVED", "STAYED");
-
-                    }
+            case 2:
+                color = ContextCompat.getColor(GameActivity.this, R.color.boardColor2);
+                break;
+            case 3:
+                color = ContextCompat.getColor(GameActivity.this, R.color.boardColor3);
+                break;
+            case 4:
+                color = ContextCompat.getColor(GameActivity.this, R.color.boardColor4);
+                break;
+            case 5:
+                color = ContextCompat.getColor(GameActivity.this, R.color.boardColor5);
+                break;
+            case 6:
+                color = ContextCompat.getColor(GameActivity.this, R.color.boardColor6);
+                break;
+            case 7:
+                color = ContextCompat.getColor(GameActivity.this, R.color.boardColor7);
+                break;
+            case 8:
+                color = ContextCompat.getColor(GameActivity.this, R.color.boardColor8);
+                break;
+            case 9:
+                color = ContextCompat.getColor(GameActivity.this, R.color.boardColor9);
+                break;
+            case 10:
+                color = ContextCompat.getColor(GameActivity.this, R.color.boardColor10);
+                break;
+            case 11:
+                color = ContextCompat.getColor(GameActivity.this, R.color.boardColor11);
+                break;
+            case 12:
+                color = ContextCompat.getColor(GameActivity.this, R.color.boardColor12);
+                break;
+            case 13:
+                color = ContextCompat.getColor(GameActivity.this, R.color.boardColor13);
+                break;
+            case 14:
+                color = ContextCompat.getColor(GameActivity.this, R.color.boardColor14);
+                break;
+            case 15:
+                color = ContextCompat.getColor(GameActivity.this, R.color.boardColor15);
+                break;
+            case 16:
+                color = ContextCompat.getColor(GameActivity.this, R.color.boardColor16);
+                break;
 
         }
-        return super.onTouchEvent(event);
+
+        return color;
 
     }
 
@@ -1350,64 +1345,67 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
-    private String getBackgroundColor(int c) {
-
-        String color = "#FFFFFF";
-
-        switch(c) {
-            case 1:
-                color = "#28a136";
-                break;
-            case 2:
-                color = "#96a1a1";
-                break;
-            case 3:
-                color = "#d1f4b8";
-                break;
-            case 4:
-                color = "#e3f5c2";
-                break;
-            case 5:
-                color = "#6d6d6d";
-                break;
-            case 6:
-                color = "#9b9b9b";
-                break;
-            case 7:
-                color = "#bc976a";
-                break;
-            case 8:
-                color = "#c67f41";
-                break;
-            case 9:
-                color = "#63ccc9";
-                break;
-            case 10:
-                color = "#f9f9bd";
-                break;
-            case 11:
-                color = "#efeaa6";
-                break;
-            case 12:
-                color = "#fff42a";
-                break;
-            case 13:
-                color = "#d4d4ba";
-                break;
-            case 14:
-                color = "#90be61";
-                break;
-            case 15:
-                color = "#94d093";
-                break;
-            case 16:
-                color = "#557659";
-                break;
-
-        }
-
-        return color;
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
 
     }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+
+
+    }
+
+    // Swipe functionality for movement
+    // TODO: all directions
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                x1 = event.getX();
+                break;
+            case MotionEvent.ACTION_UP:
+                x2 = event.getX();
+                float deltaX = x2 - x1;
+
+                if (Math.abs(deltaX) > MIN_DISTANCE) {
+                    // Left to Right swipe action
+                    if (x2 > x1) {
+
+                        //TODO:
+                        Log.e("MOVED", "LEFT");
+
+                    }
+
+                    // Right to left swipe action
+                    else if (x2 < x1) {
+
+                        //TODO:
+                        Log.e("MOVED", "LEFT");
+
+                        }
+                    } else {
+
+                    //TODO:
+                    Log.e("MOVED", "STAYED");
+
+                    }
+
+        }
+        return super.onTouchEvent(event);
+
+    }
+
+
 
 }

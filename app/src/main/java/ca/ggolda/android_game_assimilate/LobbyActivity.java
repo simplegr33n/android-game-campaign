@@ -300,8 +300,8 @@ public class LobbyActivity extends AppCompatActivity {
 
 
                         // only show games if there is a white and a black player
-                        if (((dataSnapshot.getValue(InstanceGame.class).getBlack()) != null) && ((dataSnapshot.getValue(InstanceGame.class).getWhite()) != null)) {
-
+                        // TODO: consider changing
+                        if (((dataSnapshot.getValue(InstanceGame.class).getBlue()) != null) && ((dataSnapshot.getValue(InstanceGame.class).getRed()) != null)) {
 
                             int temp = 1;
 

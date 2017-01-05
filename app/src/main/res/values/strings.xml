@@ -3,14 +3,7 @@
 
 
     <string name="piece_layer">
-        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
-        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
-        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
-        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
-        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
-        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
-        free_square,player_black,free_square,free_square,free_square,free_square,free_square,free_square,
-        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        red_none,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
         free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
         free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
         free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
@@ -30,11 +23,54 @@
         free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
         free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
         free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
-        free_square,free_square,free_square,free_square,free_square,free_square,player_white,free_square,
         free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
         free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
         free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
-        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,blue_none
+    </string>
+
+
+    <string name="new_gameset">
+        red_none,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,blue_none
     </string>
 
 

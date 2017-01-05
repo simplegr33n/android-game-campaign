@@ -8,11 +8,12 @@ public class InstanceGame {
 
     private String mMatch_id;
     private String mBoard;
-    private String mWhite;
-    private String mBlack;
+    private String mGameset;
+    private String mRed;
+    private String mBlue;
     private String mTurn_color;
-    private String mUsername_white;
-    private String mUsername_black;
+    private String mUsername_red;
+    private String mUsername_blue;
     private Long mLast_play;
 
 
@@ -22,14 +23,15 @@ public class InstanceGame {
     }
 
     // Constructor for InstanceGame with all attributes
-    public InstanceGame(String match_id, String board, String white, String black, String turn_color, String username_white, String username_black, Long last_play) {
+    public InstanceGame(String match_id, String board, String gameset, String red, String blue, String turn_color, String username_red, String username_blue, Long last_play) {
         mMatch_id = match_id;
         mBoard = board;
-        mWhite = white;
-        mBlack = black;
+        mGameset = gameset;
+        mRed = red;
+        mBlue = blue;
         mTurn_color = turn_color;
-        mUsername_white = username_white;
-        mUsername_black = username_black;
+        mUsername_red = username_red;
+        mUsername_blue = username_blue;
         mLast_play = last_play;
 
     }
@@ -49,18 +51,25 @@ public class InstanceGame {
         this.mBoard = mBoard;
     }
 
-    public String getWhite() {
-        return mWhite;
+    public String getGameset() {
+        return mGameset;
     }
-    public void setWhite(String mWhite) {
-        this.mWhite = mWhite;
+    public void setGameset(String mGameset) {
+        this.mGameset = mGameset;
     }
 
-    public String getBlack() {
-        return mBlack;
+    public String getRed() {
+        return mRed;
     }
-    public void setBlack(String mBlack) {
-        this.mBlack = mBlack;
+    public void setRed(String mRed) {
+        this.mRed = mRed;
+    }
+
+    public String getBlue() {
+        return mBlue;
+    }
+    public void setBlue(String mBlue) {
+        this.mBlue = mBlue;
     }
 
     public String getTurn_color() {
@@ -68,23 +77,20 @@ public class InstanceGame {
     }
     public void setTurn_color(String mTurn_color) {
         this.mTurn_color = mTurn_color;
-
-
     }
 
-    public String getUsername_white() {
-        return mUsername_white;
+    public String getUsername_red() {
+        return mUsername_red;
     }
-    public void setUsername_white(String mUsername_white) {
-        this.mUsername_white = mUsername_white;
+    public void setUsername_red(String mUsername_red) {
+        this.mUsername_red = mUsername_red;
     }
 
-    public String getUsername_black() {
-        return mUsername_black;
+    public String getUsername_blue() {
+        return mUsername_blue;
     }
-    public void setUsername_black(String mUsername_black) {
-        this.mUsername_black = mUsername_black;
-
+    public void setUsername_blue(String mUsername_blue) {
+        this.mUsername_blue = mUsername_blue;
     }
 
     public Long getLast_play() {

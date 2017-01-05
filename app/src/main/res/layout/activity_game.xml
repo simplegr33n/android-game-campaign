@@ -9,6 +9,7 @@
     <!-- the board -->
     <LinearLayout
         android:id="@+id/board"
+        android:background="#000"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -3795,11 +3796,11 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="#FFF"
+                android:background="#FF0000"
                 android:gravity="center"
-                android:text="you are: WHITE"
+                android:text="you are: RED"
                 android:textAlignment="center"
-                android:textColor="#000"
+                android:textColor="#FFF"
                 android:textStyle="bold" />
 
             <TextView
@@ -3807,9 +3808,9 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="#000"
+                android:background="#0000ff"
                 android:gravity="center"
-                android:text="turn: BLACK"
+                android:text="turn: BLUE"
                 android:textAlignment="center"
                 android:textColor="#FFF"
                 android:textStyle="bold" />

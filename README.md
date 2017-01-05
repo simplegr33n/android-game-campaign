@@ -13,8 +13,8 @@
 * Painting
 * Movement
 * Random Drops (Power-ups and Structures)
-* Singleplayer/Computer Auto-move
-* Special rules for certain terain
+* Singleplayer/Computer Auto-movement
+* Special rules for certain terrain (water/mountains)
 * Some rules for procedural generation (ie: higher change of water near water/mountains near mountains)
 
 
