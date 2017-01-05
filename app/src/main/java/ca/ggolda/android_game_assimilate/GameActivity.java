@@ -19,6 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by gcgol on 12/19/2016.
@@ -404,12 +405,30 @@ public class GameActivity extends AppCompatActivity {
         clearSelected();
 
 
+        // Units
         gamesetString = getString(R.string.piece_layer);
         gamesetList = Arrays.asList(gamesetString.split("\\s*,\\s*"));
 
 
-        boardsetString = getString(R.string.environment_layer);
+        // Ground
+        // IF boardsetString null or "", create new random board (ground)
+        if ((boardsetString.equals("")) || (boardsetString == null)) {
+            for (int i =0; i < 256; i++) {
+
+                Random r = new Random();
+                int tempInt = r.nextInt(17 - 1) + 1;
+                String tempString = String.valueOf(tempInt);
+
+
+
+                boardsetString += "" + tempString + ",";
+                Log.e("VALUES", boardsetString);
+            }
+
+        }
+
         boardsetList = Arrays.asList(boardsetString.split("\\s*,\\s*"));
+
 
 
         //set board color based on boardsetList
@@ -1326,7 +1345,7 @@ public class GameActivity extends AppCompatActivity {
                 break;
 
             case 2:
-                color = "#f7fbfb";
+                color = "#96a1a1";
                 break;
 
             case 3:
@@ -1350,7 +1369,7 @@ public class GameActivity extends AppCompatActivity {
                 color = "#c67f41";
                 break;
             case 9:
-                color = "#ddfcfb";
+                color = "#63ccc9";
                 break;
             case 10:
                 color = "#f9f9bd";
