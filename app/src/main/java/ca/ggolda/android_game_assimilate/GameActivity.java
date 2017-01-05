@@ -115,6 +115,11 @@ public class GameActivity extends AppCompatActivity {
             }
         };
 
+
+        // Find imageviews
+        declareBoard();
+
+
         // Get boardset String from firebase
         // set board
         mGamesDatabaseReference.child(match_id).child("board").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -124,7 +129,9 @@ public class GameActivity extends AppCompatActivity {
 
                 boardsetString = dataSnapshot.getValue(String.class);
 
-                // Ground
+                Log.e("YOYOYOLO", ""+boardsetString);
+
+
                 // IF boardsetString null or "", create new random board (ground)
                 if ((boardsetString == null) || (boardsetString.equals("null")) || (boardsetString.equals(""))) {
                     boardsetString = "";
@@ -139,10 +146,13 @@ public class GameActivity extends AppCompatActivity {
                         Log.e("VALUES", boardsetString);
                     }
                     mGamesDatabaseReference.child(match_id).child("board").setValue(boardsetString);
+                }
 
-                    declareBoard();
-                } else {
-                    declareBoard();
+                Log.e("YOYOYOLO", ""+boardsetString);
+
+                if ((boardsetString != null)) {
+                    // Set board
+                    setBoard();
                 }
 
             }
@@ -153,6 +163,7 @@ public class GameActivity extends AppCompatActivity {
             }
 
         });
+
 
 
     }
@@ -430,19 +441,11 @@ public class GameActivity extends AppCompatActivity {
         o16 = (ImageView) findViewById(R.id.tile_255);
         p16 = (ImageView) findViewById(R.id.tile_256);
 
-
-        setBoard();
-
-
     }
 
     private void setBoard() {
 
-        clearSelected();
-
-
         boardsetList = Arrays.asList(boardsetString.split("\\s*,\\s*"));
-
 
         // Sprites
         // if gamesetString null or "", create new opening gameset
@@ -460,9 +463,9 @@ public class GameActivity extends AppCompatActivity {
             int color;
 
             if (!(boardsetList.get(i).equals(""))) {
-                color = Color.parseColor("#FFFFFF");
-            } else {
                 color = getBackgroundColor(Integer.valueOf(boardsetList.get(i)));
+            } else {
+                color = Color.parseColor("#000");
             }
 
             if (getSquareImageView(i) != null ) {
@@ -486,10 +489,6 @@ public class GameActivity extends AppCompatActivity {
 
 
         }
-
-    }
-
-    private void clearSelected() {
 
     }
 
