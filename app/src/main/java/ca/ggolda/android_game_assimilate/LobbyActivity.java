@@ -212,8 +212,6 @@ public class LobbyActivity extends AppCompatActivity {
 
                             //TODO: ensure these all happen
                             mGamesDatabaseReference.child(eventId).child("white").setValue(userId);
-                            String newBoard = getResources().getString(R.string.piece_layer);
-                            mGamesDatabaseReference.child(eventId).child("board").setValue(newBoard);
                             mGamesDatabaseReference.child(eventId).child("turn_color").setValue("white");
                             mUsersDatabaseReference.child(userId).child("games").child(eventId).setValue(true);
                             mGamesDatabaseReference.child("offers").child(eventId).setValue(true);

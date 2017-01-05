@@ -405,11 +405,6 @@ public class GameActivity extends AppCompatActivity {
         clearSelected();
 
 
-        // Units
-        gamesetString = getString(R.string.piece_layer);
-        gamesetList = Arrays.asList(gamesetString.split("\\s*,\\s*"));
-
-
         // Ground
         // IF boardsetString null or "", create new random board (ground)
         if ((boardsetString.equals("")) || (boardsetString == null)) {
@@ -426,8 +421,15 @@ public class GameActivity extends AppCompatActivity {
             }
 
         }
-
         boardsetList = Arrays.asList(boardsetString.split("\\s*,\\s*"));
+
+
+        // Sprites
+        // if gamesetString null or "", create new opening gameset
+        if ((gamesetString.equals("")) || (gamesetString == null)) {
+            gamesetString = getResources().getString(R.string.piece_layer);
+        }
+        gamesetList = Arrays.asList(gamesetString.split("\\s*,\\s*"));
 
 
 
@@ -442,6 +444,19 @@ public class GameActivity extends AppCompatActivity {
                 // if gameset not null or freespace, then draw the sprite
                 if (!(gamesetList.get(i).equals("free_space"))) {
                     getSquareImageView(i).setImageResource(getResources().getIdentifier(gamesetList.get(i), "drawable", getPackageName()));
+
+                    if (gamesetList.get(i).equals("player_black")) {
+                        getSquareImageView(i).setBackgroundColor(Color.parseColor("#FFFFFF"));
+
+                    }
+
+                    if (gamesetList.get(i).equals("player_white")) {
+                        getSquareImageView(i).setBackgroundColor(Color.parseColor("#000000"));
+
+                    }
+
+
+
                 }
             }
 
@@ -1341,26 +1356,22 @@ public class GameActivity extends AppCompatActivity {
 
         switch(c) {
             case 1:
-                color = "#186421";
+                color = "#28a136";
                 break;
-
             case 2:
                 color = "#96a1a1";
                 break;
-
             case 3:
                 color = "#d1f4b8";
                 break;
-
             case 4:
                 color = "#e3f5c2";
                 break;
-
             case 5:
                 color = "#6d6d6d";
                 break;
             case 6:
-                color = "#4b4343";
+                color = "#9b9b9b";
                 break;
             case 7:
                 color = "#bc976a";

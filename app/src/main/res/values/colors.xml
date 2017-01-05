@@ -9,7 +9,7 @@
 
 
 
-    <color name="boardColor1">#186421</color>
+    <color name="boardColor1">#28a136</color>
     <color name="boardColor2">#557659</color>
     <color name="boardColor3">#94d093</color>
     <color name="boardColor4">#90be61</color>
@@ -22,7 +22,7 @@
     <color name="boardColor11">#d1f4b8</color>
     <color name="boardColor12">#e3f5c2</color>
     <color name="boardColor13">#6d6d6d</color>
-    <color name="boardColor14">#4b4343</color>
+    <color name="boardColor14">#9b9b9b</color>
     <color name="boardColor15">#bc976a</color>
     <color name="boardColor16">#c67f41</color>
 

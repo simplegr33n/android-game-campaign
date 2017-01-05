@@ -3795,11 +3795,11 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="#87ff29df"
+                android:background="#000000"
                 android:gravity="center"
-                android:text="you are: PINK"
+                android:text="you are: WHITE"
                 android:textAlignment="center"
-                android:textColor="#000000"
+                android:textColor="#FFFFFF"
                 android:textStyle="bold" />
 
             <TextView
@@ -3807,9 +3807,9 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="#a7ffed29"
+                android:background="#FFFFFF"
                 android:gravity="center"
-                android:text="turn: YELLOW"
+                android:text="turn: BLACK"
                 android:textAlignment="center"
                 android:textColor="#000000"
                 android:textStyle="bold" />
