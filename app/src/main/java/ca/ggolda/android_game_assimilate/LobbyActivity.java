@@ -216,7 +216,7 @@ public class LobbyActivity extends AppCompatActivity {
                             mUsersDatabaseReference.child(userId).child("games").child(eventId).setValue(true);
                             mGamesDatabaseReference.child("offers").child(eventId).setValue(true);
                             mGamesDatabaseReference.child(eventId).child("match_id").setValue(eventId);
-                            mGamesDatabaseReference.child(eventId).child("board").setValue(getString(R.string.new_gameset));
+                            mGamesDatabaseReference.child(eventId).child("gameset").setValue(getString(R.string.new_gameset));
                             mGamesDatabaseReference.child(eventId).child("username_red").setValue(username);
 
                             // go to game
@@ -346,10 +346,6 @@ public class LobbyActivity extends AppCompatActivity {
 
 //              // TODO: probably remove, I don't think this does anything and I don't think I want it // TODO: 01/03/2017
                 Log.e("GAME", "Changed: " + dataSnapshot.getKey());
-//                Intent intent = new Intent(LobbyActivity.this, LobbyActivity.class);
-//                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK
-//                        | Intent.FLAG_ACTIVITY_NO_ANIMATION);
-//                startActivity(intent);
 
             }
 

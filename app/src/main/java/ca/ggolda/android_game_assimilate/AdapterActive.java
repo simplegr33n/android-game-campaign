@@ -92,7 +92,7 @@ public class AdapterActive extends ArrayAdapter<InstanceGame> {
 
 
 
-        // Set white and black usernames and icons to left and right
+        // Set red and blue usernames and icons to left and right
         // depending on turn
         if (game.getRed().equals(LobbyActivity.userId)) {
 
@@ -463,6 +463,8 @@ public class AdapterActive extends ArrayAdapter<InstanceGame> {
     }
 
     private void setBoard() {
+
+        Log.e("BSSTring", ""+boardsetString);
 
         boardsetList = Arrays.asList(boardsetString.split("\\s*,\\s*"));
         gamesetList = Arrays.asList(gamesetString.split("\\s*,\\s*"));

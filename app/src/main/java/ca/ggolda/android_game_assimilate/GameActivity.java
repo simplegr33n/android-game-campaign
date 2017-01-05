@@ -422,7 +422,7 @@ public class GameActivity extends AppCompatActivity {
 
         }
 
-        mGamesDatabaseReference.child(match_id).child("gameset").setValue(boardsetString);
+        mGamesDatabaseReference.child(match_id).child("board").setValue(boardsetString);
 
         boardsetList = Arrays.asList(boardsetString.split("\\s*,\\s*"));
 
