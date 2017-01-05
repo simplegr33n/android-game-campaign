@@ -8,6 +8,18 @@
 
 
 
+## Todo
+* Turns
+* Painting
+* Movement
+* Power ups and Structures
+* Random Drops
+* Singleplayer/Computer Auto-move
+* Special rules for certain terain
+* Some rules for procedural generations (ie: higher change of water near water/mountains near mountains)
+
+### Major Bugs
+
 
 
 
