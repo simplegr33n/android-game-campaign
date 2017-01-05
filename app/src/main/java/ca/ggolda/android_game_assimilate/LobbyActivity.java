@@ -176,21 +176,21 @@ public class LobbyActivity extends AppCompatActivity {
                             final String offer = sb.toString();
                             Log.e("USEROH", "offer" + offer);
 
-                            mGamesDatabaseReference.child(offer).child("white").addListenerForSingleValueEvent(new ValueEventListener() {
+                            mGamesDatabaseReference.child(offer).child("red").addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
-                                    String player_white = dataSnapshot.getValue(String.class);
+                                    String player_red = dataSnapshot.getValue(String.class);
 
-                                    Log.e("USER", "player_white " + player_white);
+                                    Log.e("USER", "player_red " + player_red);
 
-                                    if ((player_white != null) && player_white.equals(userId)) {
+                                    if ((player_red != null) && player_red.equals(userId)) {
                                         Toast.makeText(LobbyActivity.this, "Please Wait...", Toast.LENGTH_SHORT).show();
 
                                     } else {
                                         // TODO: something to ensure these all happen
-                                        mGamesDatabaseReference.child(offer).child("black").setValue(userId);
+                                        mGamesDatabaseReference.child(offer).child("blue").setValue(userId);
                                         mUsersDatabaseReference.child(userId).child("games").child(offer).setValue(true);
-                                        mGamesDatabaseReference.child(offer).child("username_black").setValue(username);
+                                        mGamesDatabaseReference.child(offer).child("username_blue").setValue(username);
                                         mGamesDatabaseReference.child("offers").removeValue();
 
                                         // go to game
@@ -211,12 +211,13 @@ public class LobbyActivity extends AppCompatActivity {
                             String eventId = mGamesDatabaseReference.push().getKey();
 
                             //TODO: ensure these all happen
-                            mGamesDatabaseReference.child(eventId).child("white").setValue(userId);
-                            mGamesDatabaseReference.child(eventId).child("turn_color").setValue("white");
+                            mGamesDatabaseReference.child(eventId).child("red").setValue(userId);
+                            mGamesDatabaseReference.child(eventId).child("turn_color").setValue("red");
                             mUsersDatabaseReference.child(userId).child("games").child(eventId).setValue(true);
                             mGamesDatabaseReference.child("offers").child(eventId).setValue(true);
                             mGamesDatabaseReference.child(eventId).child("match_id").setValue(eventId);
-                            mGamesDatabaseReference.child(eventId).child("username_white").setValue(username);
+                            mGamesDatabaseReference.child(eventId).child("board").setValue(getString(R.string.new_gameset));
+                            mGamesDatabaseReference.child(eventId).child("username_red").setValue(username);
 
                             // go to game
                             Intent intent = new Intent(LobbyActivity.this, GameActivity.class);
@@ -299,7 +300,7 @@ public class LobbyActivity extends AppCompatActivity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
 
-                        // only show games if there is a white and a black player
+                        // only show games if there is a red and a blue player
                         // TODO: consider changing
                         if (((dataSnapshot.getValue(InstanceGame.class).getBlue()) != null) && ((dataSnapshot.getValue(InstanceGame.class).getRed()) != null)) {
 

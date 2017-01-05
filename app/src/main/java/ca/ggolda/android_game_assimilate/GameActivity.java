@@ -421,13 +421,17 @@ public class GameActivity extends AppCompatActivity {
             }
 
         }
+
+        mGamesDatabaseReference.child(match_id).child("gameset").setValue(boardsetString);
+
         boardsetList = Arrays.asList(boardsetString.split("\\s*,\\s*"));
 
 
         // Sprites
         // if gamesetString null or "", create new opening gameset
+        // TODO: maybe remove, there should always be a gamesetList by this point
         if ((gamesetString.equals("")) || (gamesetString == null)) {
-            gamesetString = getResources().getString(R.string.piece_layer);
+            gamesetString = getResources().getString(R.string.new_gameset);
         }
         gamesetList = Arrays.asList(gamesetString.split("\\s*,\\s*"));
 
