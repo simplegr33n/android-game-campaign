@@ -2,6 +2,8 @@ package ca.ggolda.android_game_assimilate;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -29,21 +31,27 @@ public class AdapterMessages extends ArrayAdapter<InstanceMessage> {
 
         InstanceMessage message = getItem(position);
 
+        Log.e("Playaco", ""+GameActivity.playerColor);
+
         // Set color of icone next to name in chat
         if (message.getName() != null) {
             if (message.getName().equals(GameActivity.username)) {
-                if (GameActivity.playerColor.equals("white")) {
-                    colorSide.setImageResource(R.drawable.free_square);
+                if (GameActivity.playerColor.equals("red")) {
+                    colorSide.setImageResource(R.drawable.red_none);
+                    colorSide.setBackgroundColor(Color.parseColor("#FF0000"));
 
-                } else if (GameActivity.playerColor.equals("black")) {
-                    colorSide.setImageResource(R.drawable.free_square);
+                } else if (GameActivity.playerColor.equals("blue")) {
+                    colorSide.setImageResource(R.drawable.blue_none);
+                    colorSide.setBackgroundColor(Color.parseColor("#0000FF"));
                 }
             } else {
-                if (GameActivity.playerColor.equals("white")) {
-                    colorSide.setImageResource(R.drawable.free_square);
+                if (GameActivity.playerColor.equals("red")) {
+                    colorSide.setImageResource(R.drawable.blue_none);
+                    colorSide.setBackgroundColor(Color.parseColor("#0000FF"));
 
-                } else if (GameActivity.playerColor.equals("black")) {
-                    colorSide.setImageResource(R.drawable.free_square);
+                } else if (GameActivity.playerColor.equals("blue")) {
+                    colorSide.setImageResource(R.drawable.red_none);
+                    colorSide.setBackgroundColor(Color.parseColor("#FF0000"));
                 }
             }
         }

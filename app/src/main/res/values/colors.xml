@@ -10,21 +10,22 @@
 
 
     <color name="boardColor1">#28a136</color>
-    <color name="boardColor2">#c5b472</color>
     <color name="boardColor3">#94d093</color>
     <color name="boardColor4">#90be61</color>
+    <color name="boardColor11">#d1f4b8</color>
+    <color name="boardColor12">#fdfffd</color>
+    <color name="boardColor16">#c67f41</color>
+    <color name="boardColor15">#bc976a</color>
+    <color name="boardColor2">#c5b472</color>
     <color name="boardColor5">#d4d4ba</color>
-    <color name="boardColor6">#fff42a</color>
     <color name="boardColor7">#efeaa6</color>
     <color name="boardColor8">#f9f9bd</color>
-    <color name="boardColor9">#63ccc9</color>
-    <color name="boardColor10">#96a1a1</color>
-    <color name="boardColor11">#d1f4b8</color>
-    <color name="boardColor12">#e3f5c2</color>
+    <color name="boardColor6">#fff42a</color>
     <color name="boardColor13">#6d6d6d</color>
     <color name="boardColor14">#9b9b9b</color>
-    <color name="boardColor15">#bc976a</color>
-    <color name="boardColor16">#c67f41</color>
+    <color name="boardColor10">#4ee2e2</color>
+    <color name="boardColor9">#5597a9</color>
+
 
 
 

@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -119,41 +121,20 @@ public class GameActivity extends AppCompatActivity {
         // Find imageviews
         declareBoard();
 
-
-        // Get boardset String from firebase
-        // set board
-        mGamesDatabaseReference.child(match_id).child("board").addListenerForSingleValueEvent(new ValueEventListener() {
+        // Username listener and chat fragment setter
+        mUsernameValueListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.e("YOYOYO", ""+dataSnapshot.getValue());
 
-                boardsetString = dataSnapshot.getValue(String.class);
+                Log.e("WHADDUP", "" + dataSnapshot.getValue());
 
-                Log.e("YOYOYOLO", ""+boardsetString);
+                username = dataSnapshot.getValue(String.class);
 
-
-                // IF boardsetString null or "", create new random board (ground)
-                if ((boardsetString == null) || (boardsetString.equals("null")) || (boardsetString.equals(""))) {
-                    boardsetString = "";
-
-                    for (int i =0; i < 256; i++) {
-
-                        Random r = new Random();
-                        int tempInt = r.nextInt(17 - 1) + 1;
-                        String tempString = String.valueOf(tempInt);
-
-                        boardsetString += "" + tempString + ",";
-                        Log.e("VALUES", boardsetString);
-                    }
-                    mGamesDatabaseReference.child(match_id).child("board").setValue(boardsetString);
-                }
-
-                Log.e("YOYOYOLO", ""+boardsetString);
-
-                if ((boardsetString != null)) {
-                    // Set board
-                    setBoard();
-                }
+                // Set Chat fragment
+                FragChat fragChat = new FragChat();
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.add(R.id.frame_chat, fragChat);
+                transaction.commit();
 
             }
 
@@ -161,9 +142,83 @@ public class GameActivity extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
                 System.out.println("The read failed: " + databaseError.getCode());
             }
+        };
 
+        mGamesDatabaseReference.child(match_id).child("red").addListenerForSingleValueEvent(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.getValue().equals(userId)) {
+                    playerColor = "red";
+                } else {
+                    playerColor = "blue";
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
         });
 
+
+        // Get boardset String from firebase
+        // set board
+        mGamesDatabaseReference.child(match_id).child("board").
+                addListenerForSingleValueEvent(new ValueEventListener() {
+                                                   @Override
+                                                   public void onDataChange(DataSnapshot dataSnapshot) {
+                                                       Log.e("YOYOYO", "" + dataSnapshot.getValue());
+
+                                                       boardsetString = dataSnapshot.getValue(String.class);
+
+                                                       Log.e("YOYOYOLO", "" + boardsetString);
+
+
+                                                       // IF boardsetString null or "", create new random board (ground)
+                                                       if ((boardsetString == null) || (boardsetString.equals("null")) || (boardsetString.equals(""))) {
+                                                           boardsetString = "";
+
+                                                           for (int i = 0; i < 256; i++) {
+
+                                                               Random r = new Random();
+                                                               int tempInt = r.nextInt(17 - 1) + 1;
+                                                               String tempString = String.valueOf(tempInt);
+
+                                                               boardsetString += "" + tempString + ",";
+                                                               Log.e("VALUES", boardsetString);
+                                                           }
+                                                           mGamesDatabaseReference.child(match_id).child("board").setValue(boardsetString);
+                                                       }
+
+                                                       Log.e("YOYOYOLO", "" + boardsetString);
+
+                                                       if ((boardsetString != null)) {
+                                                           // Set board
+                                                           setBoard();
+                                                       }
+
+                                                   }
+
+                                                   @Override
+                                                   public void onCancelled(DatabaseError databaseError) {
+                                                       System.out.println("The read failed: " + databaseError.getCode());
+                                                   }
+
+                                               }
+
+                );
+
+
+        // Get username from firebase
+        mUsersDatabaseReference.child(userId).
+
+                child("username")
+
+                .
+
+                        addListenerForSingleValueEvent(mUsernameValueListener);
 
 
     }
@@ -214,7 +269,7 @@ public class GameActivity extends AppCompatActivity {
         i3 = (ImageView) findViewById(R.id.tile_41);
         j3 = (ImageView) findViewById(R.id.tile_42);
         k3 = (ImageView) findViewById(R.id.tile_43);
-        l3= (ImageView) findViewById(R.id.tile_44);
+        l3 = (ImageView) findViewById(R.id.tile_44);
         m3 = (ImageView) findViewById(R.id.tile_45);
         n3 = (ImageView) findViewById(R.id.tile_46);
         o3 = (ImageView) findViewById(R.id.tile_47);
@@ -456,7 +511,6 @@ public class GameActivity extends AppCompatActivity {
         gamesetList = Arrays.asList(gamesetString.split("\\s*,\\s*"));
 
 
-
         //set board color based on boardsetList
         for (int i = 0; i < boardsetList.size(); i++) {
 
@@ -468,21 +522,23 @@ public class GameActivity extends AppCompatActivity {
                 color = Color.parseColor("#000");
             }
 
-            if (getSquareImageView(i) != null ) {
+            if (getSquareImageView(i) != null) {
                 getSquareImageView(i).setBackgroundColor(color);
 
                 // if gameset not null or freespace, then draw the sprite
                 if (!(gamesetList.get(i).equals("free_space"))) {
                     getSquareImageView(i).setImageResource(getResources().getIdentifier(gamesetList.get(i), "drawable", getPackageName()));
 
-                    if (gamesetList.get(i).equals("red_none")) {
+                    // Make player pieces selectable
+                    if (gamesetList.get(i).equals("red_none") && playerColor.equals("red")) {
                         getSquareImageView(i).setBackgroundColor(Color.parseColor("#FF0000"));
+                        selectUnit(i);
 
                     }
 
-                    if (gamesetList.get(i).equals("blue_none")) {
+                    if (gamesetList.get(i).equals("blue_none") && playerColor.equals("blue")) {
                         getSquareImageView(i).setBackgroundColor(Color.parseColor("#0000FF"));
-
+                        selectUnit(i);
                     }
                 }
             }
@@ -492,11 +548,12 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
+
     private int getBackgroundColor(int c) {
 
         int color = ContextCompat.getColor(GameActivity.this, R.color.boardColor1);
 
-        switch(c) {
+        switch (c) {
             case 1:
                 color = ContextCompat.getColor(GameActivity.this, R.color.boardColor1);
                 break;
@@ -1368,6 +1425,45 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
+    private void selectUnit(int i) {
+        final ImageView iv = getSquareImageView(i);
+        final int localI = i;
+
+        iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                for (int i = 0; i < 256; i++) {
+                    final ImageView space = getSquareImageView(i);
+                    // if statement for +1 forward
+                    if ((i == localI + 8) && (space != null)) {
+
+                        space.setBackgroundColor(Color.parseColor("#A600FF00"));
+                        space.setOnClickListener(new View.OnClickListener() {
+                            public void onClick(View v) {
+
+                            }
+                        });
+
+
+                    }
+                }
+
+                iv.setBackgroundColor(Color.parseColor("#00FF00"));
+                iv.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        iv.setBackgroundColor(Color.parseColor("#FF0000"));
+
+
+                    }
+                });
+
+
+            }
+        });
+    }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -1383,7 +1479,6 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
 
 
     }
@@ -1416,19 +1511,18 @@ public class GameActivity extends AppCompatActivity {
                         //TODO:
                         Log.e("MOVED", "LEFT");
 
-                        }
-                    } else {
+                    }
+                } else {
 
                     //TODO:
                     Log.e("MOVED", "STAYED");
 
-                    }
+                }
 
         }
         return super.onTouchEvent(event);
 
     }
-
 
 
 }
