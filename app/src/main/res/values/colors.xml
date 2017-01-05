@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="boardWhite">#FFFFFF</color>
+    <color name="boardBlack">#000000</color>
+
+
+
+    <color name="boardColor1">#186421</color>
+    <color name="boardColor2">#557659</color>
+    <color name="boardColor3">#94d093</color>
+    <color name="boardColor4">#90be61</color>
+    <color name="boardColor5">#d4d4ba</color>
+    <color name="boardColor6">#fff42a</color>
+    <color name="boardColor7">#efeaa6</color>
+    <color name="boardColor8">#f9f9bd</color>
+    <color name="boardColor9">#ddfcfb</color>
+    <color name="boardColor10">#f7fbfb</color>
+    <color name="boardColor11">#d1f4b8</color>
+    <color name="boardColor12">#e3f5c2</color>
+    <color name="boardColor13">#6d6d6d</color>
+    <color name="boardColor14">#4b4343</color>
+    <color name="boardColor15">#bc976a</color>
+    <color name="boardColor16">#c67f41</color>
+
+
+
+
+
+
+</resources>

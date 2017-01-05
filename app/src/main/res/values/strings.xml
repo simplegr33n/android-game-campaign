@@ -1,0 +1,108 @@
+<resources>
+    <string name="app_name">Assimilate</string>
+
+
+    <string name="piece_layer">
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,player_black,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square
+    </string>
+
+
+    <string name="environment_layer">
+        4,14,16,12,4,1,6,8,
+        2,9,3,6,10,16,4,11,
+        7,10,4,1,9,6,5,2,
+        4,14,16,12,4,1,6,8,
+        2,9,3,6,10,16,4,11,
+        7,10,4,1,9,6,5,2,
+        4,14,16,12,4,1,6,8,
+        9,3,15,12,8,14,13,9,
+        9,3,15,12,8,14,13,9,
+        2,9,3,6,10,16,4,11,
+        7,10,4,1,9,6,5,2,
+        4,14,16,12,4,1,6,8,
+        9,3,15,12,8,14,13,9,
+        7,10,4,1,9,6,5,2,
+        9,3,15,12,8,14,13,9,
+        4,14,16,12,4,1,6,8,
+        4,14,16,12,4,1,6,8,
+        2,9,3,6,10,16,4,11,
+        7,10,4,1,9,6,5,2,
+        4,14,16,12,4,1,6,8,
+        2,9,3,6,10,16,4,11,
+        7,10,4,1,9,6,5,2,
+        4,14,16,12,4,1,6,8,
+        9,3,15,12,8,14,13,9,
+        9,3,15,12,8,14,13,9,
+        2,9,3,6,10,16,4,11,
+        7,10,4,1,9,6,5,2,
+        4,14,16,12,4,1,6,8,
+        9,3,15,12,8,14,13,9,
+        7,10,4,1,9,6,5,2,
+        9,3,15,12,8,14,13,9,
+        4,14,16,12,4,1,6,8
+    </string>
+
+
+    <!-- from Firebase Auth -->
+    <string name="action_sign_in_short">Register</string>
+    <string name="email">Email</string>
+    <string name="minimum_password">Password too short, enter minimum 6 characters!</string>
+    <string name="auth_failed">Authentication failed, check your email and password or sign up</string>
+    <string name="change_email">Change Email</string>
+    <string name="change_password">Change Password</string>
+    <string name="send_password_reset_email">Send Password reset email</string>
+    <string name="remove_user">Remove user</string>
+    <string name="new_pass">New Password</string>
+    <string name="title_activity_profile">Firebase</string>
+    <string name="title_activity_login">Sign in</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_name">Fullname</string>
+    <string name="btn_login">LOGIN</string>
+    <string name="btn_link_to_register">Not a member? Get registered in Firebase now!</string>
+    <string name="btn_link_to_login">Already registered? Login!</string>
+    <string name="title_activity_reset_password">ResetPasswordActivity</string>
+    <string name="btn_forgot_password">Forgot your password?</string>
+    <string name="btn_reset_password">Reset Password</string>
+    <string name="btn_back"><![CDATA[<< Back]]></string>
+    <string name="hint_new_email">New Email</string>
+    <string name="btn_change">Change</string>
+    <string name="btn_send">Send</string>
+    <string name="btn_remove">Remove</string>
+    <string name="btn_sign_out">Sign Out</string>
+    <string name="lbl_forgot_password">Forgot password?</string>
+    <string name="forgot_password_msg">We just need your registered Email Id to sent you password reset instructions.</string>
+
+
+</resources>
