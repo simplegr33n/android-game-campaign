@@ -86,6 +86,36 @@ public class LobbyActivity extends AppCompatActivity {
             }
         };
 
+        // Ensure user has username
+        mUsersDatabaseReference.child(userId).child("username").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                Log.e("USER", "GAME2uname " + dataSnapshot.getValue());
+
+                if (dataSnapshot.getValue() == null) {
+
+                    LinearLayout waitLayout = (LinearLayout) findViewById(R.id.wait_layout);
+                    waitLayout.setVisibility(View.GONE);
+
+                    LinearLayout usernameLayout = (LinearLayout) findViewById(R.id.username_layout);
+                    usernameLayout.setVisibility(View.VISIBLE);
+
+                }
+
+                if (dataSnapshot.getValue() != null) {
+                    LinearLayout loadLayout = (LinearLayout) findViewById(R.id.load_layout);
+                    loadLayout.setVisibility(View.GONE);
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
 
         // Get username
         mUsersDatabaseReference.child(userId).child("username").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -124,31 +154,6 @@ public class LobbyActivity extends AppCompatActivity {
 
         });
 
-        // Ensure user has username
-        mUsersDatabaseReference.child(userId).child("username").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                Log.e("USER", "GAME2uname " + dataSnapshot.getValue());
-
-                if (dataSnapshot.getValue() == null) {
-                    LinearLayout usernameLayout = (LinearLayout) findViewById(R.id.username_layout);
-                    usernameLayout.setVisibility(View.VISIBLE);
-
-                }
-
-                if (dataSnapshot.getValue() != null) {
-                    LinearLayout usernameLayout = (LinearLayout) findViewById(R.id.username_layout);
-                    usernameLayout.setVisibility(View.GONE);
-
-                }
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
 
 
         //create a random game offer

@@ -105,8 +105,8 @@ public class AdapterActive extends ArrayAdapter<InstanceGame> {
                     nameLeftTextView.setBackgroundColor(Color.parseColor("#2D7A53"));
                     nameRightTextView.setText(game.getUsername_blue());
 
-                    leftPawn.setImageResource(R.drawable.free_square);
-                    rightPawn.setImageResource(R.drawable.free_square);
+                    leftPawn.setImageResource(R.drawable.red_none);
+                    rightPawn.setImageResource(R.drawable.blue_none);
 
                     break;
                 case ("blue"):
@@ -117,8 +117,8 @@ public class AdapterActive extends ArrayAdapter<InstanceGame> {
                     vTextView.setVisibility(View.INVISIBLE);
                     nameLeftTextView.setText(game.getUsername_blue() + "'s TURN");
 
-                    leftPawn.setImageResource(R.drawable.free_square);
-                    rightPawn.setImageResource(R.drawable.free_square);
+                    leftPawn.setImageResource(R.drawable.blue_none);
+                    rightPawn.setImageResource(R.drawable.red_none);
 
                     break;
 
@@ -136,8 +136,8 @@ public class AdapterActive extends ArrayAdapter<InstanceGame> {
                     vTextView.setVisibility(View.INVISIBLE);
                     nameLeftTextView.setText(game.getUsername_red() + "'s TURN");
 
-                    rightPawn.setImageResource(R.drawable.free_square);
-                    leftPawn.setImageResource(R.drawable.free_square);
+                    rightPawn.setImageResource(R.drawable.blue_none);
+                    leftPawn.setImageResource(R.drawable.red_none);
 
                     break;
 
@@ -149,8 +149,8 @@ public class AdapterActive extends ArrayAdapter<InstanceGame> {
                     nameLeftTextView.setBackgroundColor(Color.parseColor("#2D7A53"));
                     nameRightTextView.setText(game.getUsername_red());
 
-                    rightPawn.setImageResource(R.drawable.free_square);
-                    leftPawn.setImageResource(R.drawable.free_square);
+                    rightPawn.setImageResource(R.drawable.red_none);
+                    leftPawn.setImageResource(R.drawable.blue_none);
 
                     break;
 
