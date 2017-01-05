@@ -12,11 +12,10 @@
 * Turns
 * Painting
 * Movement
-
 * Random Drops (Power-ups and Structures)
 * Singleplayer/Computer Auto-move
 * Special rules for certain terain
-* Some rules for procedural generations (ie: higher change of water near water/mountains near mountains)
+* Some rules for procedural generation (ie: higher change of water near water/mountains near mountains)
 
 
 
