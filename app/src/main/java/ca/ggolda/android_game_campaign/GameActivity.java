@@ -1455,6 +1455,7 @@ public class GameActivity extends AppCompatActivity {
 
             }
 
+            // for Deselect
             iv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
