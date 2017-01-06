@@ -1460,8 +1460,8 @@ public class GameActivity extends AppCompatActivity {
                 public void onClick(View view) {
                     if (playerColor.equals("red")) {
                         iv.setBackgroundColor(Color.parseColor("#FF0000"));
-                    } else if (playerColor.equals("red")) {
-                        iv.setBackgroundColor(Color.parseColor("#FF0000"));
+                    } else if (playerColor.equals("blue")) {
+                        iv.setBackgroundColor(Color.parseColor("#0000FF"));
                     }
 
                     for (int p = 0; p < 256; p++) {
