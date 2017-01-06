@@ -20,6 +20,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.Arrays;
@@ -79,7 +80,9 @@ public class GameActivity extends AppCompatActivity {
     public static String username;
     public static String playerColor;
 
-    private int currentPosition;
+
+    private String selectedUnit = "";
+    private int currentPosition = 999;
 
     private String unitEquiptment = "none";
 
@@ -165,47 +168,75 @@ public class GameActivity extends AppCompatActivity {
         });
 
 
-        // Get boardset String from firebase
+        // Get boardset and gameset String from firebase
         // set board
-        mGamesDatabaseReference.child(match_id).child("board").
-                addListenerForSingleValueEvent(new ValueEventListener() {
-                                                   @Override
-                                                   public void onDataChange(DataSnapshot dataSnapshot) {
+        mGamesDatabaseReference.child(match_id).child("board")
+                .addListenerForSingleValueEvent
+                        (new ValueEventListener() {
+                             @Override
+                             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                                                       boardsetString = dataSnapshot.getValue(String.class);
+                                 boardsetString = dataSnapshot.getValue(String.class);
 
-                                                       // IF boardsetString null or "", create new random board (ground)
-                                                       if ((boardsetString == null) || (boardsetString.equals("null")) || (boardsetString.equals(""))) {
-                                                           boardsetString = "";
+                                 Log.e("OUO BSS", "" + boardsetString);
 
-                                                           for (int i = 0; i < 256; i++) {
+                                 // IF boardsetString null or "", create new random board (ground)
+                                 if ((boardsetString == null) || (boardsetString.equals("null")) || (boardsetString.equals(""))) {
+                                     boardsetString = "";
 
-                                                               Random r = new Random();
-                                                               int tempInt = r.nextInt(17 - 1) + 1;
-                                                               String tempString = String.valueOf(tempInt);
+                                     for (int i = 0; i < 256; i++) {
 
-                                                               boardsetString += "" + tempString + ",";
+                                         Random r = new Random();
+                                         int tempInt = r.nextInt(17 - 1) + 1;
+                                         String tempString = String.valueOf(tempInt);
 
-                                                           }
-                                                           mGamesDatabaseReference.child(match_id).child("board").setValue(boardsetString);
-                                                       }
+                                         boardsetString += "" + tempString + ",";
+
+                                     }
+                                     mGamesDatabaseReference.child(match_id).child("board").setValue(boardsetString);
+                                 }
 
 
-                                                       if ((boardsetString != null)) {
-                                                           // Set board
-                                                           setBoard();
-                                                       }
+                                 if ((boardsetString != null)) {
 
-                                                   }
+                                     // Get gameset String from firebase
+                                     mGamesDatabaseReference.child(match_id).child("gameset").
+                                             addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                                @Override
+                                                                                public void onDataChange(DataSnapshot dataSnapshot) {
 
-                                                   @Override
-                                                   public void onCancelled(DatabaseError databaseError) {
-                                                       System.out.println("The read failed: " + databaseError.getCode());
-                                                   }
+                                                                                    gamesetString = dataSnapshot.getValue(String.class);
 
-                                               }
+                                                                                    Log.e("OUO GSS", "" + gamesetString);
 
-                );
+                                                                                    // Set board
+                                                                                    setBoard();
+
+
+                                                                                }
+
+                                                                                @Override
+                                                                                public void onCancelled(DatabaseError databaseError) {
+                                                                                    System.out.println("The read failed: " + databaseError.getCode());
+                                                                                }
+
+                                                                            }
+
+                                             );
+
+
+                                 }
+
+                             }
+
+                             @Override
+                             public void onCancelled(DatabaseError databaseError) {
+                                 System.out.println("The read failed: " + databaseError.getCode());
+                             }
+
+                         }
+
+                        );
 
 
         // Get username from firebase
@@ -493,15 +524,7 @@ public class GameActivity extends AppCompatActivity {
     private void setBoard() {
 
         boardsetList = Arrays.asList(boardsetString.split("\\s*,\\s*"));
-
-        // Sprites
-        // if gamesetString null or "", create new opening gameset
-        // TODO: maybe remove, there should always be a gamesetList by this point
-        if ((gamesetString.equals("")) || (gamesetString == null)) {
-            gamesetString = getResources().getString(R.string.new_gameset);
-        }
         gamesetList = Arrays.asList(gamesetString.split("\\s*,\\s*"));
-
 
         //set board color based on boardsetList
         for (int i = 0; i < boardsetList.size(); i++) {
@@ -518,7 +541,7 @@ public class GameActivity extends AppCompatActivity {
                 getSquareImageView(i).setBackgroundColor(color);
 
                 // if gameset not null or freespace, then draw the sprite
-                if (!(gamesetList.get(i).equals("free_space"))) {
+                if (!((gamesetList == null) || (gamesetList.get(i).equals("free_space")))) {
                     getSquareImageView(i).setImageResource(getResources().getIdentifier(gamesetList.get(i), "drawable", getPackageName()));
 
                     // Make player pieces selectable
@@ -530,7 +553,7 @@ public class GameActivity extends AppCompatActivity {
 
                             getSquareImageView(i).setOnClickListener(new View.OnClickListener() {
                                 public void onClick(View v) {
-                                    selectedUnit(currentPosition);
+                                    onSelected(currentPosition);
                                 }
                             });
                         }
@@ -545,7 +568,7 @@ public class GameActivity extends AppCompatActivity {
 
                             getSquareImageView(i).setOnClickListener(new View.OnClickListener() {
                                 public void onClick(View v) {
-                                    selectedUnit(currentPosition);
+                                    onSelected(currentPosition);
                                 }
                             });
 
@@ -559,7 +582,6 @@ public class GameActivity extends AppCompatActivity {
         }
 
     }
-
 
     private int getBackgroundColor(int c) {
 
@@ -1437,24 +1459,30 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
-    private void selectedUnit(int i) {
+    private void onSelected(int i) {
         final ImageView iv = getSquareImageView(i);
-        final int localI = i;
 
+        //TODO: this may be redundant
+        currentPosition = i;
+        selectedUnit = gamesetList.get(i);
 
         iv.setBackgroundColor(Color.parseColor("#00FF00"));
 
         for (int p = 0; p < 256; p++) {
             final ImageView space = getSquareImageView(p);
-            // if statement for +1 forward
-            if ((p == localI + 16) || (p == localI - 16) || (p == localI + 1) || (p == localI - 1)) {
+            // if statement for movement 1 in each direction
+            if ((p == currentPosition + 16) || (p == currentPosition - 16) || (p == currentPosition + 1) || (p == currentPosition - 1)) {
+
+                //TODO: do i really need to do this?
+                final int localP = p;
 
                 space.setImageResource(R.drawable.free_indicator);
                 space.setOnClickListener(new View.OnClickListener() {
-                    public void onClick(View v) {
+                    @Override
+                    public void onClick(View view) {
 
                         //TODO: on click of selectable squares
-
+                        moveTo(localP);
 
 
                     }
@@ -1475,14 +1503,14 @@ public class GameActivity extends AppCompatActivity {
 
                     getSquareImageView(currentPosition).setOnClickListener(new View.OnClickListener() {
                         public void onClick(View v) {
-                            selectedUnit(currentPosition);
+                            onSelected(currentPosition);
                         }
                     });
 
                     for (int p = 0; p < 256; p++) {
                         final ImageView space = getSquareImageView(p);
                         // if statement for +1 forward
-                        if ((p == localI + 16) || (p == localI - 16) || (p == localI + 1) || (p == localI - 1)) {
+                        if ((p == currentPosition + 16) || (p == currentPosition - 16) || (p == currentPosition + 1) || (p == currentPosition - 1)) {
 
                             space.setImageResource(R.drawable.free_square);
                             space.setOnClickListener(null);
@@ -1492,7 +1520,6 @@ public class GameActivity extends AppCompatActivity {
                     }
 
 
-
                 }
             });
 
@@ -1500,7 +1527,105 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
+    private void moveTo(int moveTo) {
 
+        Log.e("OUO CP", " " + currentPosition);
+        Log.e("OUO M2", " " + moveTo);
+        Log.e("OUO SU", " " + selectedUnit);
+
+        ImageView space = getSquareImageView(moveTo);
+        ImageView fromView = getSquareImageView(currentPosition);
+
+
+        // draw piece in new space
+        if (playerColor.equals("red")) {
+            if (unitEquiptment.equals("none")) {
+                space.setImageResource(R.drawable.red_none);
+                // set in gamesetList
+                gamesetList.set(moveTo, "red_none");
+            }
+            space.setBackgroundColor(Color.parseColor("#FF0000"));
+            fromView.setImageResource(R.drawable.free_square);
+
+
+        } else if (playerColor.equals("blue")) {
+            if (unitEquiptment.equals("none")) {
+                space.setImageResource(R.drawable.blue_none);
+                // set in gamesetList
+                gamesetList.set(moveTo, "blue_none");
+            }
+            space.setBackgroundColor(Color.parseColor("#0000FF"));
+            fromView.setImageResource(R.drawable.free_square);
+        }
+
+        // change gamesetList to be changed to gamesetString for storage
+        gamesetList.set(moveTo, selectedUnit);
+        if (currentPosition != 999) {
+            gamesetList.set(currentPosition, "free_square");
+        }
+
+
+        gamesetString = "";
+        for (
+                int i = 0;
+                i < gamesetList.size(); i++)
+
+        {
+            if (i != 0) {
+                gamesetString = gamesetString + "," + gamesetList.get(i);
+            }
+            if (i == 0) {
+                gamesetString = gamesetList.get(i);
+            }
+        }
+
+
+        Log.e("EYHO9", gamesetString);
+
+        // set new gameset
+        mGamesDatabaseReference.child(match_id).child("gameset").setValue(gamesetString);
+
+        //TODO: update board
+        //  mGamesDatabaseReference.child(match_id).child("board").setValue(gamesetString);
+
+        //Change turn color
+        if (turn.equals("red"))
+
+        {
+            mGamesDatabaseReference.child(match_id).child("turn_color").setValue("blue");
+        } else if (turn.equals("blue"))
+
+        {
+            mGamesDatabaseReference.child(match_id).child("turn_color").setValue("red");
+        }
+
+        mGamesDatabaseReference.child(match_id).child("last_play").setValue(ServerValue.TIMESTAMP);
+
+
+        // Clear selected which itself resets board
+        clearSelected();
+
+    }
+
+    private void clearSelected() {
+        selectedUnit = "";
+        currentPosition = 999;
+
+
+        // null onclick listeners
+        for (int i = 0; i < 256; i++) {
+            //If not a game piece, setOnclick null
+            if (!((gamesetList.get(i).equals("red_none") || (gamesetList.get(i).equals("blue_none")))))
+            {
+                ImageView iView = getSquareImageView(i);
+                iView.setOnClickListener(null);
+            }
+        }
+
+        // Reset board
+        setBoard();
+
+    }
 
     @Override
     public void onBackPressed() {
