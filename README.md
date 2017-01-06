@@ -10,7 +10,6 @@
 
 
 ## Todo
-* Turns
 * Paint-Filling
 * Cross-Side and Cross-Top Movement
 * Center-focus and Fog-of-War
