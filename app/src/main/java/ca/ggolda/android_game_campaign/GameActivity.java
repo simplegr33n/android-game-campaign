@@ -506,6 +506,8 @@ public class GameActivity extends AppCompatActivity {
 
             int color;
 
+            final int hereI = i;
+
             if (!(boardsetList.get(i).equals(""))) {
                 color = getBackgroundColor(Integer.valueOf(boardsetList.get(i)));
             } else {
@@ -520,15 +522,31 @@ public class GameActivity extends AppCompatActivity {
                     getSquareImageView(i).setImageResource(getResources().getIdentifier(gamesetList.get(i), "drawable", getPackageName()));
 
                     // Make player pieces selectable
-                    if (gamesetList.get(i).equals("red_none") && playerColor.equals("red")) {
+                    if (gamesetList.get(i).equals("red_none")) {
                         getSquareImageView(i).setBackgroundColor(Color.parseColor("#FF0000"));
-                        selectUnit(i);
+                        if (playerColor.equals("red")) {
+
+                            getSquareImageView(i).setOnClickListener(new View.OnClickListener() {
+                                public void onClick(View v) {
+                                    selectedUnit(hereI);
+                                }
+                            });
+                        }
 
                     }
 
-                    if (gamesetList.get(i).equals("blue_none") && playerColor.equals("blue")) {
+                    if (gamesetList.get(i).equals("blue_none")) {
                         getSquareImageView(i).setBackgroundColor(Color.parseColor("#0000FF"));
-                        selectUnit(i);
+                        if (playerColor.equals("blue")) {
+
+                            getSquareImageView(i).setOnClickListener(new View.OnClickListener() {
+                                public void onClick(View v) {
+                                    selectedUnit(hereI);
+                                }
+                            });
+
+                        }
+
                     }
                 }
             }
@@ -1415,44 +1433,59 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
-    private void selectUnit(int i) {
+    private void selectedUnit(int i) {
         final ImageView iv = getSquareImageView(i);
         final int localI = i;
 
-        iv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                for (int i = 0; i < 256; i++) {
-                    final ImageView space = getSquareImageView(i);
-                    // if statement for +1 forward
-                    if ((i == localI + 8) && (space != null)) {
+        iv.setBackgroundColor(Color.parseColor("#00FF00"));
 
-                        space.setBackgroundColor(Color.parseColor("#A600FF00"));
-                        space.setOnClickListener(new View.OnClickListener() {
-                            public void onClick(View v) {
+        for (int p = 0; p < 256; p++) {
+            final ImageView space = getSquareImageView(p);
+            // if statement for +1 forward
+            if ((p == localI + 16) || (p == localI - 16) || (p == localI + 1) || (p == localI - 1)) {
 
-                            }
-                        });
-
-
-                    }
-                }
-
-                iv.setBackgroundColor(Color.parseColor("#00FF00"));
-                iv.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        iv.setBackgroundColor(Color.parseColor("#FF0000"));
-
+                space.setImageResource(R.drawable.free_indicator);
+                space.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
 
                     }
                 });
 
 
             }
-        });
+
+            iv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (playerColor.equals("red")) {
+                        iv.setBackgroundColor(Color.parseColor("#FF0000"));
+                    } else if (playerColor.equals("red")) {
+                        iv.setBackgroundColor(Color.parseColor("#FF0000"));
+                    }
+
+                    for (int p = 0; p < 256; p++) {
+                        final ImageView space = getSquareImageView(p);
+                        // if statement for +1 forward
+                        if ((p == localI + 16) || (p == localI - 16) || (p == localI + 1) || (p == localI - 1)) {
+
+                            space.setImageResource(R.drawable.free_square);
+                            space.setOnClickListener(null);
+
+
+                        }
+                    }
+
+
+
+                }
+            });
+
+
+        }
     }
+
+
 
     @Override
     public void onBackPressed() {
@@ -1474,7 +1507,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     // Swipe functionality for movement
-    // TODO: all directions
+    // TODO: all directions.. maybe remove?
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
