@@ -1,5 +1,8 @@
 # <img src="https://github.com/simplegr33n/android-game-assimilate/blob/master/screenshots/logos/logo1.jpg" width="32"> Android Campaign
 
+Check out the Alpha on Google Play:
+https://play.google.com/store/apps/details?id=ca.ggolda.android_game_campaign
+
 <hr>
 ## Screenshots
 
