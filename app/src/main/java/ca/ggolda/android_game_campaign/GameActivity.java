@@ -79,6 +79,8 @@ public class GameActivity extends AppCompatActivity {
     public static String username;
     public static String playerColor;
 
+    private int currentPosition;
+
     private String unitEquiptment = "none";
 
     private static final int SWIPE_MIN_DISTANCE = 120;
@@ -506,8 +508,6 @@ public class GameActivity extends AppCompatActivity {
 
             int color;
 
-            final int hereI = i;
-
             if (!(boardsetList.get(i).equals(""))) {
                 color = getBackgroundColor(Integer.valueOf(boardsetList.get(i)));
             } else {
@@ -526,9 +526,11 @@ public class GameActivity extends AppCompatActivity {
                         getSquareImageView(i).setBackgroundColor(Color.parseColor("#FF0000"));
                         if (playerColor.equals("red")) {
 
+                            currentPosition = i;
+
                             getSquareImageView(i).setOnClickListener(new View.OnClickListener() {
                                 public void onClick(View v) {
-                                    selectedUnit(hereI);
+                                    selectedUnit(currentPosition);
                                 }
                             });
                         }
@@ -539,9 +541,11 @@ public class GameActivity extends AppCompatActivity {
                         getSquareImageView(i).setBackgroundColor(Color.parseColor("#0000FF"));
                         if (playerColor.equals("blue")) {
 
+                            currentPosition = i;
+
                             getSquareImageView(i).setOnClickListener(new View.OnClickListener() {
                                 public void onClick(View v) {
-                                    selectedUnit(hereI);
+                                    selectedUnit(currentPosition);
                                 }
                             });
 
@@ -1449,6 +1453,10 @@ public class GameActivity extends AppCompatActivity {
                 space.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
 
+                        //TODO: on click of selectable squares
+
+
+
                     }
                 });
 
@@ -1464,6 +1472,12 @@ public class GameActivity extends AppCompatActivity {
                     } else if (playerColor.equals("blue")) {
                         iv.setBackgroundColor(Color.parseColor("#0000FF"));
                     }
+
+                    getSquareImageView(currentPosition).setOnClickListener(new View.OnClickListener() {
+                        public void onClick(View v) {
+                            selectedUnit(currentPosition);
+                        }
+                    });
 
                     for (int p = 0; p < 256; p++) {
                         final ImageView space = getSquareImageView(p);
