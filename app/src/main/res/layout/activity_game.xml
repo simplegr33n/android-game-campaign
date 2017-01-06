@@ -3792,7 +3792,7 @@
 
 
             <TextView
-                android:id="@+id/current_side"
+                android:id="@+id/your_color"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"

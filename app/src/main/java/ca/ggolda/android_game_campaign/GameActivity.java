@@ -75,6 +75,7 @@ public class GameActivity extends AppCompatActivity {
     public static String match_id;
     private String turn = "";
     private TextView currentTurn;
+    private TextView yourColor;
 
     private String userId;
     public static String username;
@@ -99,6 +100,9 @@ public class GameActivity extends AppCompatActivity {
 
         mGamesDatabaseReference = mFirebaseDatabase.getReference().child("games");
         mUsersDatabaseReference = mFirebaseDatabase.getReference().child("users");
+
+        yourColor = (TextView) findViewById(R.id.your_color);
+        currentTurn = (TextView) findViewById(R.id.current_turn);
 
         match_id = getIntent().getStringExtra("MATCH_ID");
 
@@ -149,14 +153,21 @@ public class GameActivity extends AppCompatActivity {
             }
         };
 
+        //Set player color and playercolor views
         mGamesDatabaseReference.child(match_id).child("red").addListenerForSingleValueEvent(new ValueEventListener() {
-
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue().equals(userId)) {
                     playerColor = "red";
+                    yourColor.setText("You are Red");
+                    yourColor.setTextColor(Color.parseColor("#000000"));
+                    yourColor.setBackgroundColor(Color.parseColor("#FF0000"));
+
                 } else {
                     playerColor = "blue";
+                    yourColor.setText("You are Blue");
+                    yourColor.setTextColor(Color.parseColor("#FFFFFF"));
+                    yourColor.setBackgroundColor(Color.parseColor("#0000FF"));
                 }
 
             }
@@ -196,33 +207,57 @@ public class GameActivity extends AppCompatActivity {
                                      mGamesDatabaseReference.child(match_id).child("board").setValue(boardsetString);
                                  }
 
-
                                  if ((boardsetString != null)) {
 
                                      // Get gameset String from firebase
                                      mGamesDatabaseReference.child(match_id).child("gameset").
-                                             addListenerForSingleValueEvent(new ValueEventListener() {
-                                                                                @Override
-                                                                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                             addListenerForSingleValueEvent
+                                                     (new ValueEventListener() {
+                                                          @Override
+                                                          public void onDataChange(DataSnapshot dataSnapshot) {
 
-                                                                                    gamesetString = dataSnapshot.getValue(String.class);
+                                                              gamesetString = dataSnapshot.getValue(String.class);
 
-                                                                                    Log.e("OUO GSS", "" + gamesetString);
+                                                              Log.e("OUO GSS", "" + gamesetString);
 
-                                                                                    // Set board
-                                                                                    setBoard();
+                                                              // Watch turn color, reset board on change
+                                                              mGamesDatabaseReference.child(match_id).child("turn_color").addValueEventListener(new ValueEventListener() {
+                                                                  @Override
+                                                                  public void onDataChange(DataSnapshot dataSnapshot) {
+                                                                      if (dataSnapshot.getValue().equals("red")) {
+                                                                          turn = "red";
+                                                                          currentTurn.setText("Red Turn");
+                                                                          currentTurn.setTextColor(Color.parseColor("#000000"));
+                                                                          currentTurn.setBackgroundColor(Color.parseColor("#FF0000"));
 
+                                                                          // Set board
+                                                                          setBoard();
 
-                                                                                }
+                                                                      } else if (dataSnapshot.getValue().equals("blue")) {
+                                                                          turn = "blue";
+                                                                          currentTurn.setText("Blue Turn");
+                                                                          currentTurn.setTextColor(Color.parseColor("#FFFFFF"));
+                                                                          currentTurn.setBackgroundColor(Color.parseColor("#0000FF"));
 
-                                                                                @Override
-                                                                                public void onCancelled(DatabaseError databaseError) {
-                                                                                    System.out.println("The read failed: " + databaseError.getCode());
-                                                                                }
+                                                                          // Set board
+                                                                          setBoard();
+                                                                      }
+                                                                  }
 
-                                                                            }
+                                                                  @Override
+                                                                  public void onCancelled(DatabaseError databaseError) {
 
-                                             );
+                                                                  }
+                                                              });
+                                                          }
+
+                                                          @Override
+                                                          public void onCancelled(DatabaseError databaseError) {
+                                                              System.out.println("The read failed: " + databaseError.getCode());
+                                                          }
+                                                      }
+
+                                                     );
 
 
                                  }
@@ -521,10 +556,41 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
+    // Set up the board, which also restricts play to current turn
+    // Check gameset + playercolor + turncolor
     private void setBoard() {
 
         boardsetList = Arrays.asList(boardsetString.split("\\s*,\\s*"));
         gamesetList = Arrays.asList(gamesetString.split("\\s*,\\s*"));
+
+        if (playerColor.equals("red") && turn.equals("red")) {
+            for (int i = 0; i < gamesetList.size(); i++) {
+                if (gamesetList.get(i).equals("red_none")) {
+                    final int lovalI = i;
+                    getSquareImageView(i).setOnClickListener(new View.OnClickListener() {
+                        public void onClick(View v) {
+                            onSelected(lovalI);
+                        }
+                    });
+                }
+
+            }
+        }
+
+        if (playerColor.equals("blue") && turn.equals("blue")) {
+            for (int i = 0; i < gamesetList.size(); i++) {
+                if (gamesetList.get(i).equals("blue_none")) {
+                    final int lovalP = i;
+                    getSquareImageView(i).setOnClickListener(new View.OnClickListener() {
+                        public void onClick(View v) {
+                            onSelected(lovalP);
+                        }
+                    });
+                }
+
+            }
+        }
+
 
         //set board color based on boardsetList
         for (int i = 0; i < boardsetList.size(); i++) {
@@ -544,41 +610,17 @@ public class GameActivity extends AppCompatActivity {
                 if (!((gamesetList == null) || (gamesetList.get(i).equals("free_space")))) {
                     getSquareImageView(i).setImageResource(getResources().getIdentifier(gamesetList.get(i), "drawable", getPackageName()));
 
-                    // Make player pieces selectable
+
+                    Log.e("PlayerColor", "" + playerColor);
+
                     if (gamesetList.get(i).equals("red_none")) {
                         getSquareImageView(i).setBackgroundColor(Color.parseColor("#FF0000"));
-                        if (playerColor.equals("red")) {
-
-                            currentPosition = i;
-
-                            getSquareImageView(i).setOnClickListener(new View.OnClickListener() {
-                                public void onClick(View v) {
-                                    onSelected(currentPosition);
-                                }
-                            });
-                        }
-
-                    }
-
-                    if (gamesetList.get(i).equals("blue_none")) {
+                    } else if (gamesetList.get(i).equals("blue_none")) {
                         getSquareImageView(i).setBackgroundColor(Color.parseColor("#0000FF"));
-                        if (playerColor.equals("blue")) {
-
-                            currentPosition = i;
-
-                            getSquareImageView(i).setOnClickListener(new View.OnClickListener() {
-                                public void onClick(View v) {
-                                    onSelected(currentPosition);
-                                }
-                            });
-
-                        }
-
                     }
+
                 }
             }
-
-
         }
 
     }
@@ -1575,8 +1617,7 @@ public class GameActivity extends AppCompatActivity {
 
         // Create new gameset String
         gamesetString = "";
-        for (int i = 0; i < gamesetList.size(); i++)
-        {
+        for (int i = 0; i < gamesetList.size(); i++) {
             if (i != 0) {
                 gamesetString = gamesetString + "," + gamesetList.get(i);
             }
@@ -1587,8 +1628,7 @@ public class GameActivity extends AppCompatActivity {
 
         // Create new boardset String
         boardsetString = "";
-        for (int i = 0; i < boardsetList.size(); i++)
-        {
+        for (int i = 0; i < boardsetList.size(); i++) {
             if (i != 0) {
                 boardsetString = boardsetString + "," + boardsetList.get(i);
             }
@@ -1608,14 +1648,12 @@ public class GameActivity extends AppCompatActivity {
         mGamesDatabaseReference.child(match_id).child("board").setValue(boardsetString);
 
         //Change turn color
-        if (turn.equals("red"))
-
-        {
+        if (playerColor.equals("red")) {
             mGamesDatabaseReference.child(match_id).child("turn_color").setValue("blue");
-        } else if (turn.equals("blue"))
-
-        {
+            turn = "blue";
+        } else if (playerColor.equals("blue")) {
             mGamesDatabaseReference.child(match_id).child("turn_color").setValue("red");
+            turn = "red";
         }
 
         mGamesDatabaseReference.child(match_id).child("last_play").setValue(ServerValue.TIMESTAMP);
@@ -1630,20 +1668,16 @@ public class GameActivity extends AppCompatActivity {
         selectedUnit = "";
         currentPosition = 999;
 
-
         // null onclick listeners
         for (int i = 0; i < 256; i++) {
-            //If not a game piece, setOnclick null
-            if (!((gamesetList.get(i).equals("red_none") || (gamesetList.get(i).equals("blue_none")))))
-            {
-                ImageView iView = getSquareImageView(i);
-                iView.setOnClickListener(null);
-            }
+            //If not a game piece and your turn, setOnclick null
+
+            ImageView iView = getSquareImageView(i);
+            iView.setOnClickListener(null);
         }
 
         // Reset board
         setBoard();
-
     }
 
     @Override
@@ -1662,47 +1696,6 @@ public class GameActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-
-    }
-
-    // Swipe functionality for movement
-    // TODO: all directions.. maybe remove?
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                x1 = event.getX();
-                break;
-            case MotionEvent.ACTION_UP:
-                x2 = event.getX();
-                float deltaX = x2 - x1;
-
-                if (Math.abs(deltaX) > MIN_DISTANCE) {
-                    // Left to Right swipe action
-                    if (x2 > x1) {
-
-                        //TODO:
-                        Log.e("MOVED", "LEFT");
-
-                    }
-
-                    // Right to left swipe action
-                    else if (x2 < x1) {
-
-                        //TODO:
-                        Log.e("MOVED", "LEFT");
-
-                    }
-                } else {
-
-                    //TODO:
-                    Log.e("MOVED", "STAYED");
-
-                }
-
-        }
-        return super.onTouchEvent(event);
 
     }
 
