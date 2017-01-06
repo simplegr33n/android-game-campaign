@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ca.ggolda.android_game_assimilate;
+package ca.ggolda.android_game_campaign;
 
 public class InstanceMessage {
 

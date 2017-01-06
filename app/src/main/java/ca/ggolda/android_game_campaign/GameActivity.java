@@ -1,4 +1,4 @@
-package ca.ggolda.android_game_assimilate;
+package ca.ggolda.android_game_campaign;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -169,12 +169,8 @@ public class GameActivity extends AppCompatActivity {
                 addListenerForSingleValueEvent(new ValueEventListener() {
                                                    @Override
                                                    public void onDataChange(DataSnapshot dataSnapshot) {
-                                                       Log.e("YOYOYO", "" + dataSnapshot.getValue());
 
                                                        boardsetString = dataSnapshot.getValue(String.class);
-
-                                                       Log.e("YOYOYOLO", "" + boardsetString);
-
 
                                                        // IF boardsetString null or "", create new random board (ground)
                                                        if ((boardsetString == null) || (boardsetString.equals("null")) || (boardsetString.equals(""))) {
@@ -187,12 +183,11 @@ public class GameActivity extends AppCompatActivity {
                                                                String tempString = String.valueOf(tempInt);
 
                                                                boardsetString += "" + tempString + ",";
-                                                               Log.e("VALUES", boardsetString);
+
                                                            }
                                                            mGamesDatabaseReference.child(match_id).child("board").setValue(boardsetString);
                                                        }
 
-                                                       Log.e("YOYOYOLO", "" + boardsetString);
 
                                                        if ((boardsetString != null)) {
                                                            // Set board
@@ -212,13 +207,8 @@ public class GameActivity extends AppCompatActivity {
 
 
         // Get username from firebase
-        mUsersDatabaseReference.child(userId).
-
-                child("username")
-
-                .
-
-                        addListenerForSingleValueEvent(mUsernameValueListener);
+        mUsersDatabaseReference.child(userId).child("username").
+                addListenerForSingleValueEvent(mUsernameValueListener);
 
 
     }

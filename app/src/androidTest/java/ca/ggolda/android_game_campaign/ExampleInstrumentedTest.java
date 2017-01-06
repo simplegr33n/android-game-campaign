@@ -1,4 +1,4 @@
-package ca.ggolda.android_game_assimilate;
+package ca.ggolda.android_game_campaign;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
