@@ -19,7 +19,7 @@ https://play.google.com/store/apps/details?id=ca.ggolda.android_game_campaign
 * Random Drops (Power-ups and Structures)
 * Singleplayer/Computer Auto-Movement
 * Special rules for certain terrain (Water/Mountains)
-* Some rules for procedural generation (ie: higher chance of self-same tilecolor)
+* Some rules for procedural board generation
 
 
 
