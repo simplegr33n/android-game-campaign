@@ -3,8 +3,8 @@
 <hr>
 ## Screenshots
 
+<img src="https://github.com/simplegr33n/android-game-assimilate/blob/master/screenshots/phone0003.jpg" width="144">
 <img src="https://github.com/simplegr33n/android-game-assimilate/blob/master/screenshots/phone0004.jpg" width="144">
-<img src="https://github.com/simplegr33n/android-game-assimilate/blob/master/screenshots/phone0002.jpg" width="144">
 <img src="https://github.com/simplegr33n/android-game-assimilate/blob/master/screenshots/tablet0004.jpg" width="160">
 
 
