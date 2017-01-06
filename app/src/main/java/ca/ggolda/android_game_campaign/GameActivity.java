@@ -171,7 +171,7 @@ public class GameActivity extends AppCompatActivity {
         // Get boardset and gameset String from firebase
         // set board
         mGamesDatabaseReference.child(match_id).child("board")
-                .addListenerForSingleValueEvent
+                .addValueEventListener
                         (new ValueEventListener() {
                              @Override
                              public void onDataChange(DataSnapshot dataSnapshot) {
@@ -534,7 +534,7 @@ public class GameActivity extends AppCompatActivity {
             if (!(boardsetList.get(i).equals(""))) {
                 color = getBackgroundColor(Integer.valueOf(boardsetList.get(i)));
             } else {
-                color = Color.parseColor("#000");
+                color = Color.parseColor("#000000");
             }
 
             if (getSquareImageView(i) != null) {
@@ -588,6 +588,12 @@ public class GameActivity extends AppCompatActivity {
         int color = ContextCompat.getColor(GameActivity.this, R.color.boardColor1);
 
         switch (c) {
+            case -1:
+                color = ContextCompat.getColor(GameActivity.this, R.color.boardColorRed);
+                break;
+            case -2:
+                color = ContextCompat.getColor(GameActivity.this, R.color.boardColorBlue);
+                break;
             case 1:
                 color = ContextCompat.getColor(GameActivity.this, R.color.boardColor1);
                 break;
@@ -1538,11 +1544,13 @@ public class GameActivity extends AppCompatActivity {
 
 
         // draw piece in new space
+        // update boardsetList and gamesetList
         if (playerColor.equals("red")) {
             if (unitEquiptment.equals("none")) {
                 space.setImageResource(R.drawable.red_none);
-                // set in gamesetList
-                gamesetList.set(moveTo, "red_none");
+                // set in boardsetList, 333 for blue and 777 for red
+                boardsetList.set(moveTo, "-1");
+                boardsetList.set(currentPosition, "-1");
             }
             space.setBackgroundColor(Color.parseColor("#FF0000"));
             fromView.setImageResource(R.drawable.free_square);
@@ -1551,25 +1559,23 @@ public class GameActivity extends AppCompatActivity {
         } else if (playerColor.equals("blue")) {
             if (unitEquiptment.equals("none")) {
                 space.setImageResource(R.drawable.blue_none);
-                // set in gamesetList
-                gamesetList.set(moveTo, "blue_none");
+                // set in boardsetList 333 for blue, 777 for red
+                boardsetList.set(moveTo, "-2");
+                boardsetList.set(currentPosition, "-2");
             }
             space.setBackgroundColor(Color.parseColor("#0000FF"));
             fromView.setImageResource(R.drawable.free_square);
         }
-
-        // change gamesetList to be changed to gamesetString for storage
+        // set in gamesetList
         gamesetList.set(moveTo, selectedUnit);
         if (currentPosition != 999) {
             gamesetList.set(currentPosition, "free_square");
         }
 
 
+        // Create new gameset String
         gamesetString = "";
-        for (
-                int i = 0;
-                i < gamesetList.size(); i++)
-
+        for (int i = 0; i < gamesetList.size(); i++)
         {
             if (i != 0) {
                 gamesetString = gamesetString + "," + gamesetList.get(i);
@@ -1579,14 +1585,27 @@ public class GameActivity extends AppCompatActivity {
             }
         }
 
+        // Create new boardset String
+        boardsetString = "";
+        for (int i = 0; i < boardsetList.size(); i++)
+        {
+            if (i != 0) {
+                boardsetString = boardsetString + "," + boardsetList.get(i);
+            }
+            if (i == 0) {
+                boardsetString = boardsetList.get(i);
+            }
+        }
 
-        Log.e("EYHO9", gamesetString);
+
+        Log.e("OUO 9", gamesetString);
+        Log.e("OUO 10", boardsetString);
 
         // set new gameset
         mGamesDatabaseReference.child(match_id).child("gameset").setValue(gamesetString);
 
         //TODO: update board
-        //  mGamesDatabaseReference.child(match_id).child("board").setValue(gamesetString);
+        mGamesDatabaseReference.child(match_id).child("board").setValue(boardsetString);
 
         //Change turn color
         if (turn.equals("red"))

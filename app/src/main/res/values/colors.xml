@@ -25,6 +25,8 @@
     <color name="boardColor14">#9b9b9b</color>
     <color name="boardColor10">#4ee2e2</color>
     <color name="boardColor9">#5597a9</color>
+    <color name="boardColorRed">#FF0000</color>
+    <color name="boardColorBlue">#0000FF</color>
 
 
 

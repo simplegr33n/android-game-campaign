@@ -470,7 +470,7 @@ public class AdapterActive extends ArrayAdapter<InstanceGame> {
         gamesetList = Arrays.asList(gamesetString.split("\\s*,\\s*"));
 
 
-        //set board color based on boardsetString
+        //set board color based on boardsetList
         for (int i = 0; i < boardsetList.size(); i++) {
 
             int color = getBackgroundColor(Integer.valueOf(boardsetList.get(i)));
@@ -502,6 +502,12 @@ public class AdapterActive extends ArrayAdapter<InstanceGame> {
         int color = ContextCompat.getColor(getContext(), R.color.boardColor1);
 
         switch(c) {
+            case -1:
+                color = ContextCompat.getColor(getContext(), R.color.boardColorRed);
+                break;
+            case -2:
+                color = ContextCompat.getColor(getContext(), R.color.boardColorBlue);
+                break;
             case 1:
                 color = ContextCompat.getColor(getContext(), R.color.boardColor1);
                 break;
