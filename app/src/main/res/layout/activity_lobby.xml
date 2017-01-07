@@ -157,7 +157,6 @@
 
 
         <!-- make username! -->
-
         <LinearLayout
             android:id="@+id/load_layout"
             android:layout_width="match_parent"
