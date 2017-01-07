@@ -67,7 +67,6 @@ public class GameActivity extends AppCompatActivity {
     private DatabaseReference mUsersDatabaseReference;
 
     private ValueEventListener mUsernameValueListener;
-    private ValueEventListener mTurnColorValueListener;
 
     private LinearLayout mBoard;
 
@@ -87,9 +86,6 @@ public class GameActivity extends AppCompatActivity {
 
     private String unitEquiptment = "none";
 
-    private static final int SWIPE_MIN_DISTANCE = 120;
-    private static final int SWIPE_MAX_OFF_PATH = 250;
-    private static final int SWIPE_THRESHOLD_VELOCITY = 200;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -1518,7 +1514,7 @@ public class GameActivity extends AppCompatActivity {
         for (int p = 0; p < 256; p++) {
             final ImageView space = getSquareImageView(p);
             // if statement for movement 1 in each direction
-            if ((p == currentPosition + 16) || (p == upOne(currentPosition)) || (p == currentPosition + 1) || (p == currentPosition - 1)) {
+            if ((p == downOne(currentPosition)) || (p == upOne(currentPosition))|| (p == leftOne(currentPosition))  || (p == rightOne(currentPosition))) {
 
                 //TODO: do i really need to do this?
                 final int localP = p;
@@ -1738,6 +1734,189 @@ public class GameActivity extends AppCompatActivity {
         }
 
         return up;
+    }
+
+    private int downOne(int here) {
+        int down = 0;
+
+        switch(here) {
+            case 240:
+                down = 0;
+                break;
+            case 241:
+                down = 1;
+                break;
+            case 242:
+                down = 2;
+                break;
+            case 243:
+                down = 3;
+                break;
+            case 244:
+                down = 4;
+                break;
+            case 245:
+                down = 5;
+                break;
+            case 246:
+                down = 6;
+                break;
+            case 247:
+                down = 7;
+                break;
+            case 248:
+                down = 8;
+                break;
+            case 249:
+                down = 9;
+                break;
+            case 250:
+                down = 0;
+                break;
+            case 251:
+                down = 11;
+                break;
+            case 252:
+                down = 12;
+                break;
+            case 253:
+                down = 13;
+                break;
+            case 254:
+                down = 14;
+                break;
+            case 255:
+                down = 15;
+                break;
+            default:
+                down = here + 16;
+                break;
+
+        }
+
+        return down;
+    }
+
+    private int leftOne(int here) {
+        int left = 0;
+
+        switch(here) {
+            case 0:
+                left = 15;
+                break;
+            case 16:
+                left = 31;
+                break;
+            case 32:
+                left = 47;
+                break;
+            case 48:
+                left = 63;
+                break;
+            case 64:
+                left = 79;
+                break;
+            case 80:
+                left = 95;
+                break;
+            case 96:
+                left = 111;
+                break;
+            case 112:
+                left = 127;
+                break;
+            case 128:
+                left = 143;
+                break;
+            case 144:
+                left = 159;
+                break;
+            case 160:
+                left = 175;
+                break;
+            case 176:
+                left = 191;
+                break;
+            case 192:
+                left = 207;
+                break;
+            case 208:
+                left = 223;
+                break;
+            case 224:
+                left = 239;
+                break;
+            case 240:
+                left = 255;
+                break;
+            default:
+                left = here - 1;
+                break;
+
+        }
+
+        return left;
+    }
+
+    private int rightOne(int here) {
+        int right = 0;
+
+        switch(here) {
+            case 15:
+                right = 0;
+                break;
+            case 31:
+                right = 16;
+                break;
+            case 47:
+                right = 32;
+                break;
+            case 63:
+                right = 48;
+                break;
+            case 79:
+                right = 64;
+                break;
+            case 95:
+                right = 80;
+                break;
+            case 111:
+                right = 96;
+                break;
+            case 127:
+                right = 112;
+                break;
+            case 143:
+                right = 128;
+                break;
+            case 159:
+                right = 144;
+                break;
+            case 175:
+                right = 160;
+                break;
+            case 191:
+                right = 176;
+                break;
+            case 207:
+                right = 192;
+                break;
+            case 223:
+                right = 208;
+                break;
+            case 239:
+                right = 224;
+                break;
+            case 255:
+                right = 240;
+                break;
+            default:
+                right = here + 1;
+                break;
+
+        }
+
+        return right;
     }
 
     @Override
