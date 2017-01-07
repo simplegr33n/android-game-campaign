@@ -166,14 +166,14 @@
             android:gravity="center"
             android:orientation="vertical"
             android:visibility="visible"
-            tools:visibility="gone">
+            tools:visibility="visible">
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1.5"
-                android:background="#ed432d"
+                android:background="@color/brandRed"
                 android:gravity="center">
 
                 <TextView
@@ -194,7 +194,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="2"
-                android:background="#0000ff"
+                android:background="@color/brandBlue"
                 android:gravity="center">
 
                 <LinearLayout
@@ -302,7 +302,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="0.5"
-                android:background="#FF0000"
+                android:background="@color/brandRed"
                 android:gravity="center">
 
 

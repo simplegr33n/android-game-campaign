@@ -20,6 +20,7 @@ https://play.google.com/store/apps/details?id=ca.ggolda.android_game_campaign
 * Singleplayer/Computer Auto-Movement
 * Special rules for certain terrain (Water/Mountains)
 * Some rules for procedural board generation
+* Allow board generation from bitmaps
 
 
 

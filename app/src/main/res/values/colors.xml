@@ -8,6 +8,9 @@
     <color name="boardBlack">#000000</color>
 
 
+    <color name="brandRed">#ed432d</color>
+    <color name="brandBlue">#0125c6</color>
+
 
     <color name="boardColor1">#28a136</color>
     <color name="boardColor3">#94d093</color>
@@ -27,6 +30,12 @@
     <color name="boardColor9">#5597a9</color>
     <color name="boardColorRed">#FF0000</color>
     <color name="boardColorBlue">#0000FF</color>
+
+
+
+
+
+
 
 
 
