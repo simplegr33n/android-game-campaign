@@ -4,43 +4,36 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#ffffff</color>
 
-    <color name="boardWhite">#FFFFFF</color>
-    <color name="boardBlack">#000000</color>
+
 
 
     <color name="brandRed">#ed432d</color>
     <color name="brandBlue">#0125c6</color>
 
 
-    <color name="boardColor1">#28a136</color>
-    <color name="boardColor3">#94d093</color>
-    <color name="boardColor4">#90be61</color>
-    <color name="boardColor11">#d1f4b8</color>
-    <color name="boardColor12">#fdfffd</color>
-    <color name="boardColor16">#c67f41</color>
-    <color name="boardColor15">#bc976a</color>
-    <color name="boardColor2">#c5b472</color>
-    <color name="boardColor5">#d4d4ba</color>
-    <color name="boardColor7">#efeaa6</color>
-    <color name="boardColor8">#f9f9bd</color>
-    <color name="boardColor6">#fff42a</color>
-    <color name="boardColor13">#6d6d6d</color>
-    <color name="boardColor14">#9b9b9b</color>
-    <color name="boardColor10">#4ee2e2</color>
-    <color name="boardColor9">#5597a9</color>
-    <color name="boardColorRed">#FF0000</color>
-    <color name="boardColorBlue">#0000FF</color>
+    <color name="boardColorRed">#baFF0000</color>
+    <color name="boardColorBlue">#ba0000FF</color>
+    <color name="boardColor1">#ba28a136</color>
+    <color name="boardColor2">#ba94d093</color>
+    <color name="boardColor3">#ba90be61</color>
+    <color name="boardColor4">#bad1f4b8</color>
+    <color name="boardColor5">#bafdfffd</color>
+    <color name="boardColor6">#bac67f41</color>
+    <color name="boardColor7">#babc976a</color>
+    <color name="boardColor8">#bac5b472</color>
+    <color name="boardColor9">#bad4d4ba</color>
+    <color name="boardColor10">#baefeaa6</color>
+    <color name="boardColor11">#baf9f9bd</color>
+    <color name="boardColor12">#bafff42a</color>
+    <color name="boardColor13">#ba6d6d6d</color>
+    <color name="boardColor14">#ba9b9b9b</color>
+    <color name="boardColor15">#ba4ee2e2</color>
+    <color name="boardColor16">#ba5597a9</color>
 
 
-
-
-
-
-
-
-
-
-
+    <!-- making transparent for now because it's creating a grid... maybe merge into one "color", boardTransparent -->
+    <color name="boardWhite">#00ffffff</color>
+    <color name="boardBlack">#00000000</color>
 
 
 </resources>
