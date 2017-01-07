@@ -1518,7 +1518,7 @@ public class GameActivity extends AppCompatActivity {
         for (int p = 0; p < 256; p++) {
             final ImageView space = getSquareImageView(p);
             // if statement for movement 1 in each direction
-            if ((p == currentPosition + 16) || (p == currentPosition - 16) || (p == currentPosition + 1) || (p == currentPosition - 1)) {
+            if ((p == currentPosition + 16) || (p == upOne(currentPosition)) || (p == currentPosition + 1) || (p == currentPosition - 1)) {
 
                 //TODO: do i really need to do this?
                 final int localP = p;
@@ -1677,6 +1677,67 @@ public class GameActivity extends AppCompatActivity {
 
         // Reset board
         setBoard();
+    }
+
+    private int upOne(int here) {
+        int up = 0;
+
+        switch(here) {
+            case 0:
+                up = 240;
+                break;
+            case 1:
+                up = 241;
+                break;
+            case 2:
+                up = 242;
+                break;
+            case 3:
+                up = 243;
+                break;
+            case 4:
+                up = 244;
+                break;
+            case 5:
+                up = 245;
+                break;
+            case 6:
+                up = 246;
+                break;
+            case 7:
+                up = 247;
+                break;
+            case 8:
+                up = 248;
+                break;
+            case 9:
+                up = 249;
+                break;
+            case 10:
+                up = 250;
+                break;
+            case 11:
+                up = 251;
+                break;
+            case 12:
+                up = 252;
+                break;
+            case 13:
+                up = 253;
+                break;
+            case 14:
+                up = 254;
+                break;
+            case 15:
+                up = 255;
+                break;
+            default:
+                up = here - 16;
+                break;
+
+        }
+
+        return up;
     }
 
     @Override
