@@ -246,7 +246,7 @@
                         android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"
                         android:hint="candidate"
                         android:inputType="textFilter"
-                        android:maxLength="8"
+                        android:maxLength="9"
                         android:paddingBottom="8dp"
                         android:textAlignment="center"
                         android:textColorHint="#bdb6b6"
@@ -285,7 +285,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_weight="1"
-                            android:text="(max length 8 characters)"
+                            android:text="(max length 9 characters)"
                             android:textAlignment="center"
                             android:textColor="#dddddd" />
 

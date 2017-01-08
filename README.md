@@ -4,16 +4,20 @@ Check out the Alpha on Google Play:
 https://play.google.com/store/apps/details?id=ca.ggolda.android_game_campaign
 
 <hr>
-## Screenshots
 
+## Power-Ups
+### <img src="https://github.com/simplegr33n/android-game-campaign/blob/master/app/src/main/res/drawable/free_shelter.png" width="32"> Shelter
+* Allows player to build a 3x3 insulator around themselves
+
+### <img src="https://github.com/simplegr33n/android-game-campaign/blob/master/app/src/main/res/drawable/free_fastforward.png" width="32"> Fast-Forward
+* Allows player to move 3 steps in a turn
+
+
+## Screenshots
 <img src="https://github.com/simplegr33n/android-game-assimilate/blob/master/screenshots/phone0003.jpg" width="144">
 <img src="https://github.com/simplegr33n/android-game-assimilate/blob/master/screenshots/phone0005.jpg" width="144">
 <img src="https://github.com/simplegr33n/android-game-assimilate/blob/master/screenshots/tablet0004.jpg" width="160">
 <img src="https://github.com/simplegr33n/android-game-assimilate/blob/master/screenshots/tablet0005.jpg" width="160">
-
-
-
-
 
 ## Todo
 * Paint-Filling
