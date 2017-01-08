@@ -6,10 +6,10 @@ https://play.google.com/store/apps/details?id=ca.ggolda.android_game_campaign
 <hr>
 
 ## Power-Ups
-### <img src="https://github.com/simplegr33n/android-game-campaign/blob/master/app/src/main/res/drawable/free_shelter.png" width="32"> Shelter
+### <img src="https://github.com/simplegr33n/android-game-campaign/blob/master/app/src/main/res/drawable/free_shelter.png" width="24"> Shelter
 * Allows player to build a 3x3 insulator around themselves
 
-### <img src="https://github.com/simplegr33n/android-game-campaign/blob/master/app/src/main/res/drawable/free_fastforward.png" width="32"> Fast-Forward
+### <img src="https://github.com/simplegr33n/android-game-campaign/blob/master/app/src/main/res/drawable/free_fastforward.png" width="24"> Fast-Forward
 * Allows player to move 3 steps in a turn
 
 
