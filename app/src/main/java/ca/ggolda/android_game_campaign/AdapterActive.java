@@ -483,12 +483,12 @@ public class AdapterActive extends ArrayAdapter<InstanceGame> {
                     getSquareImageView(i).setImageResource(getContext().getResources().getIdentifier(gamesetList.get(i), "drawable", getContext().getPackageName()));
 
                     if (gamesetList.get(i).equals("red_none")) {
-                        getSquareImageView(i).setBackgroundColor(Color.parseColor("#FF0000"));
+                        getSquareImageView(i).setBackgroundColor(getBackgroundColor(-1));
 
                     }
 
                     if (gamesetList.get(i).equals("blue_none")) {
-                        getSquareImageView(i).setBackgroundColor(Color.parseColor("#0000FF"));
+                        getSquareImageView(i).setBackgroundColor(getBackgroundColor(-2));
 
                     }
 
@@ -502,11 +502,14 @@ public class AdapterActive extends ArrayAdapter<InstanceGame> {
         int color = ContextCompat.getColor(getContext(), R.color.boardColor1);
 
         switch(c) {
+            case -2:
+                color = ContextCompat.getColor(getContext(), R.color.boardColorBlue);
+                break;
             case -1:
                 color = ContextCompat.getColor(getContext(), R.color.boardColorRed);
                 break;
-            case -2:
-                color = ContextCompat.getColor(getContext(), R.color.boardColorBlue);
+            case 0:
+                color = ContextCompat.getColor(getContext(), R.color.boardColorBlack);
                 break;
             case 1:
                 color = ContextCompat.getColor(getContext(), R.color.boardColor1);

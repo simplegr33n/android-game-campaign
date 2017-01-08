@@ -3769,6 +3769,17 @@
 
         </LinearLayout>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/display_result"
+            android:background="#a1e9a1"
+            android:text="YOU WIN!"
+            android:textStyle="bold"
+            android:textSize="32sp"
+            android:visibility="gone"
+            android:gravity="center"/>
+
     </RelativeLayout>
 
     <!-- chatbox -->

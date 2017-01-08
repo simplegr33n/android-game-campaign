@@ -558,13 +558,20 @@ public class GameActivity extends AppCompatActivity {
         boardsetList = Arrays.asList(boardsetString.split("\\s*,\\s*"));
         gamesetList = Arrays.asList(gamesetString.split("\\s*,\\s*"));
 
+        // For coloring starting positions
+        // TODO: this somewhere/somehow else probably
+        boardsetList.set(0, "-1");
+        boardsetList.set(255, "-2");
+
+        checkWin();
+
         if (playerColor.equals("red") && turn.equals("red")) {
             for (int i = 0; i < gamesetList.size(); i++) {
                 if (gamesetList.get(i).equals("red_none")) {
-                    final int lovalI = i;
+                    final int localI = i;
                     getSquareImageView(i).setOnClickListener(new View.OnClickListener() {
                         public void onClick(View v) {
-                            onSelected(lovalI);
+                            onSelected(localI);
                         }
                     });
                 }
@@ -575,10 +582,10 @@ public class GameActivity extends AppCompatActivity {
         if (playerColor.equals("blue") && turn.equals("blue")) {
             for (int i = 0; i < gamesetList.size(); i++) {
                 if (gamesetList.get(i).equals("blue_none")) {
-                    final int lovalP = i;
+                    final int localI = i;
                     getSquareImageView(i).setOnClickListener(new View.OnClickListener() {
                         public void onClick(View v) {
-                            onSelected(lovalP);
+                            onSelected(localI);
                         }
                     });
                 }
@@ -604,15 +611,6 @@ public class GameActivity extends AppCompatActivity {
                 // if gameset not null or freespace, then draw the sprite
                 if (!((gamesetList == null) || (gamesetList.get(i).equals("free_space")))) {
                     getSquareImageView(i).setImageResource(getResources().getIdentifier(gamesetList.get(i), "drawable", getPackageName()));
-
-
-                    Log.e("PlayerColor", "" + playerColor);
-
-                    if (gamesetList.get(i).equals("red_none")) {
-                        getSquareImageView(i).setBackgroundColor(Color.parseColor("#FF0000"));
-                    } else if (gamesetList.get(i).equals("blue_none")) {
-                        getSquareImageView(i).setBackgroundColor(Color.parseColor("#0000FF"));
-                    }
 
                 }
             }
@@ -1530,7 +1528,6 @@ public class GameActivity extends AppCompatActivity {
                         //TODO: on click of selectable squares
                         moveTo(localP);
 
-
                     }
                 });
 
@@ -1542,9 +1539,9 @@ public class GameActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     if (playerColor.equals("red")) {
-                        iv.setBackgroundColor(Color.parseColor("#FF0000"));
+                        iv.setBackgroundColor(getBackgroundColor(-1));
                     } else if (playerColor.equals("blue")) {
-                        iv.setBackgroundColor(Color.parseColor("#0000FF"));
+                        iv.setBackgroundColor(getBackgroundColor(-2));
                     }
 
                     getSquareImageView(currentPosition).setOnClickListener(new View.OnClickListener() {
@@ -1937,6 +1934,7 @@ public class GameActivity extends AppCompatActivity {
         return right;
     }
 
+    //TODO: Fix StackOverflowError
     private void fillSpiller(int square, int color) {
         // Set default setColor to black to make bugs obvious
         String setColor = "0";;
@@ -1962,6 +1960,44 @@ public class GameActivity extends AppCompatActivity {
         if (Integer.valueOf(boardsetList.get(rightOne(square))) == color) {
             boardsetList.set(rightOne(square), setColor);
             fillSpiller(rightOne(square), color);
+        }
+    }
+
+    private void checkWin() {
+        TextView displayResult = (TextView) findViewById(R.id.display_result);
+
+        if (playerColor.equals("red")) {
+            for (int i = 0; i < gamesetList.size(); i++) {
+                if (gamesetList.get(i).equals("red_none") && (boardsetList.get(i).equals("-2")) ) {
+                    displayResult.setText("You Lose!");
+                    displayResult.setBackgroundColor(Color.parseColor("#6EECC485"));
+                    displayResult.setVisibility(View.VISIBLE);
+
+                }
+                if (gamesetList.get(i).equals("blue_none") && (boardsetList.get(i).equals("-1")) ) {
+                    displayResult.setText("You Win!");
+                    displayResult.setBackgroundColor(Color.parseColor("#6Ea1e9a1"));
+                    displayResult.setVisibility(View.VISIBLE);
+
+                }
+            }
+
+        }
+        if (playerColor.equals("blue")) {
+            for (int i = 0; i < gamesetList.size(); i++) {
+                if (gamesetList.get(i).equals("blue_none") && (boardsetList.get(i).equals("-1")) ) {
+                    displayResult.setText("You Lose!");
+                    displayResult.setBackgroundColor(Color.parseColor("#6EECC485"));
+                    displayResult.setVisibility(View.VISIBLE);
+
+                }
+                if (gamesetList.get(i).equals("red_none") && (boardsetList.get(i).equals("-2")) ) {
+                    displayResult.setText("You Win!");
+                    displayResult.setBackgroundColor(Color.parseColor("#6Ea1e9a1"));
+                    displayResult.setVisibility(View.VISIBLE);
+
+                }
+            }
         }
     }
 
