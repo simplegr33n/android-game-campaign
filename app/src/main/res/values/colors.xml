@@ -11,6 +11,7 @@
     <color name="brandBlue">#0125c6</color>
 
 
+    <color name="boardColorBlack">#000000</color>
     <color name="boardColorRed">#baFF0000</color>
     <color name="boardColorBlue">#ba0000FF</color>
     <color name="boardColor1">#ba28a136</color>

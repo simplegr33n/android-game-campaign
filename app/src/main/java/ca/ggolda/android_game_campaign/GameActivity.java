@@ -625,11 +625,14 @@ public class GameActivity extends AppCompatActivity {
         int color = ContextCompat.getColor(GameActivity.this, R.color.boardColor1);
 
         switch (c) {
+            case -2:
+                color = ContextCompat.getColor(GameActivity.this, R.color.boardColorBlue);
+                break;
             case -1:
                 color = ContextCompat.getColor(GameActivity.this, R.color.boardColorRed);
                 break;
-            case -2:
-                color = ContextCompat.getColor(GameActivity.this, R.color.boardColorBlue);
+            case 0:
+                color = ContextCompat.getColor(GameActivity.this, R.color.boardColorBlack);
                 break;
             case 1:
                 color = ContextCompat.getColor(GameActivity.this, R.color.boardColor1);
@@ -1514,7 +1517,7 @@ public class GameActivity extends AppCompatActivity {
         for (int p = 0; p < 256; p++) {
             final ImageView space = getSquareImageView(p);
             // if statement for movement 1 in each direction
-            if ((p == downOne(currentPosition)) || (p == upOne(currentPosition))|| (p == leftOne(currentPosition))  || (p == rightOne(currentPosition))) {
+            if ((p == downOne(currentPosition)) || (p == upOne(currentPosition)) || (p == leftOne(currentPosition)) || (p == rightOne(currentPosition))) {
 
                 //TODO: do i really need to do this?
                 final int localP = p;
@@ -1585,9 +1588,17 @@ public class GameActivity extends AppCompatActivity {
         if (playerColor.equals("red")) {
             if (unitEquiptment.equals("none")) {
                 space.setImageResource(R.drawable.red_none);
-                // set in boardsetList, 333 for blue and 777 for red
+
+                // get prior color to send to fillSpiller
+                int priorColor = Integer.valueOf(boardsetList.get(moveTo));
+
+                // set in boardsetList, -2 for blue and -1 for red
                 boardsetList.set(moveTo, "-1");
                 boardsetList.set(currentPosition, "-1");
+
+                // send moveTo position and the color it was previously to fillSpiller method
+                fillSpiller(moveTo, priorColor);
+
             }
             space.setBackgroundColor(Color.parseColor("#FF0000"));
             fromView.setImageResource(R.drawable.free_square);
@@ -1596,9 +1607,16 @@ public class GameActivity extends AppCompatActivity {
         } else if (playerColor.equals("blue")) {
             if (unitEquiptment.equals("none")) {
                 space.setImageResource(R.drawable.blue_none);
-                // set in boardsetList 333 for blue, 777 for red
+
+                // get prior color to send to fillSpiller
+                int priorColor = Integer.valueOf(boardsetList.get(moveTo));
+
+                // set in boardsetList -2 for blue, -1 for red
                 boardsetList.set(moveTo, "-2");
                 boardsetList.set(currentPosition, "-2");
+
+                // send moveTo position and the color it was previously to fillSpiller method
+                fillSpiller(moveTo, priorColor);
             }
             space.setBackgroundColor(Color.parseColor("#0000FF"));
             fromView.setImageResource(R.drawable.free_square);
@@ -1678,7 +1696,7 @@ public class GameActivity extends AppCompatActivity {
     private int upOne(int here) {
         int up = 0;
 
-        switch(here) {
+        switch (here) {
             case 0:
                 up = 240;
                 break;
@@ -1739,7 +1757,7 @@ public class GameActivity extends AppCompatActivity {
     private int downOne(int here) {
         int down = 0;
 
-        switch(here) {
+        switch (here) {
             case 240:
                 down = 0;
                 break;
@@ -1800,7 +1818,7 @@ public class GameActivity extends AppCompatActivity {
     private int leftOne(int here) {
         int left = 0;
 
-        switch(here) {
+        switch (here) {
             case 0:
                 left = 15;
                 break;
@@ -1861,7 +1879,7 @@ public class GameActivity extends AppCompatActivity {
     private int rightOne(int here) {
         int right = 0;
 
-        switch(here) {
+        switch (here) {
             case 15:
                 right = 0;
                 break;
@@ -1917,6 +1935,34 @@ public class GameActivity extends AppCompatActivity {
         }
 
         return right;
+    }
+
+    private void fillSpiller(int square, int color) {
+        // Set default setColor to black to make bugs obvious
+        String setColor = "0";;
+
+        if (playerColor.equals("red")) {
+            setColor = "-1";
+        } else if (playerColor.equals("blue")) {
+            setColor = "-2";
+        }
+
+        if (Integer.valueOf(boardsetList.get(upOne(square))) == color) {
+            boardsetList.set(upOne(square), setColor);
+            fillSpiller(upOne(square), color);
+        }
+        if (Integer.valueOf(boardsetList.get(downOne(square))) == color) {
+            boardsetList.set(downOne(square), setColor);
+            fillSpiller(downOne(square), color);
+        }
+        if (Integer.valueOf(boardsetList.get(leftOne(square))) == color) {
+            boardsetList.set(leftOne(square), setColor);
+            fillSpiller(leftOne(square), color);
+        }
+        if (Integer.valueOf(boardsetList.get(rightOne(square))) == color) {
+            boardsetList.set(rightOne(square), setColor);
+            fillSpiller(rightOne(square), color);
+        }
     }
 
     @Override
