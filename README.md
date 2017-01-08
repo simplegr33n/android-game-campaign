@@ -19,7 +19,8 @@ https://play.google.com/store/apps/details?id=ca.ggolda.android_game_campaign
 * Allows player to move 3 steps in a turn
 
 ## Todo
-* Center-focus and Fog-of-War
+* Center-Focus & Zoom (7x7) 
+* Fog-of-War
 * Random Drops (Power-ups and Structures)
 * Singleplayer/Computer Auto-Movement
 * Special rules for certain terrain (Water/Mountains)
