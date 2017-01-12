@@ -1,10 +1,7 @@
 package ca.ggolda.android_game_campaign;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -14,12 +11,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.Arrays;
@@ -67,7 +60,7 @@ public class GameActivitySingle extends AppCompatActivity {
     private LinearLayout mBoard;
 
 
-    private String turn = "";
+    private String turn = "red";
     private TextView currentTurn;
     private TextView yourColor;
 
@@ -433,11 +426,49 @@ public class GameActivitySingle extends AppCompatActivity {
         } else {
             // TODO: COMPUTER MOVES HERE I THINK
             //
-            //
-            //
-            //
-            //
 
+            Log.e("GameActivitySingle", "I M Computa");
+
+
+            for (int i = 0; i < gamesetList.size(); i++) {
+                if (gamesetList.get(i).equals("blue_none")) {
+
+                    Log.e("Computa", "" + gamesetList.get(i));
+
+                    currentPosition = i;
+                    selectedUnit = "blue_none";
+
+                    Log.e("Computa", "DownOne" + downOne(currentPosition));
+                    Log.e("Computa", "upOne" + upOne(currentPosition));
+
+                    Random r = new Random();
+
+
+
+                    int computerPath = r.nextInt(5 - 1) + 1;
+
+                    Log.e("Computa", "Random" + computerPath);
+
+                    Log.e("Computa", "computerPath" + computerPath);
+
+
+                    switch (computerPath) {
+                        case 1:
+                            moveTo(upOne(i));
+                            break;
+                        case 2:
+                            moveTo(downOne(i));
+                            break;
+                        case 3:
+                            moveTo(rightOne(i));
+                            break;
+                        case 4:
+                            moveTo(leftOne(i));
+                            break;
+                    }
+                }
+
+            }
         }
 
 
@@ -464,6 +495,7 @@ public class GameActivitySingle extends AppCompatActivity {
         }
 
     }
+
 
     private int getBackgroundColor(int c) {
 
@@ -1429,7 +1461,7 @@ public class GameActivitySingle extends AppCompatActivity {
 
         // draw piece in new space
         // update boardsetList and gamesetList
-        if (playerColor.equals("red")) {
+        if (turn.equals("red")) {
             if (unitEquiptment.equals("none")) {
                 space.setImageResource(R.drawable.red_none);
 
@@ -1448,7 +1480,7 @@ public class GameActivitySingle extends AppCompatActivity {
             fromView.setImageResource(R.drawable.free_square);
 
 
-        } else if (playerColor.equals("blue")) {
+        } else if (turn.equals("blue")) {
             if (unitEquiptment.equals("none")) {
                 space.setImageResource(R.drawable.blue_none);
 
@@ -1459,12 +1491,16 @@ public class GameActivitySingle extends AppCompatActivity {
                 boardsetList.set(moveTo, "-2");
                 boardsetList.set(currentPosition, "-2");
 
+
                 // send moveTo position and the color it was previously to fillSpiller method
                 fillSpiller(moveTo, priorColor);
             }
             space.setBackgroundColor(Color.parseColor("#0000FF"));
             fromView.setImageResource(R.drawable.free_square);
+
         }
+
+
         // set in gamesetList
         gamesetList.set(moveTo, selectedUnit);
         if (currentPosition != 999) {
@@ -1492,6 +1528,13 @@ public class GameActivitySingle extends AppCompatActivity {
             if (i == 0) {
                 boardsetString = boardsetList.get(i);
             }
+        }
+
+        // change turn
+        if (turn.equals("red")){
+            turn = "blue";
+        } else if (turn.equals("blue")){
+            turn = "red";
         }
 
 
