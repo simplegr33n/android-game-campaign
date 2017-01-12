@@ -27,8 +27,9 @@
 
         <activity android:name="ca.ggolda.android_game_campaign.SignupActivity" android:screenOrientation="portrait"/>
 
-        <activity android:name="ca.ggolda.android_game_campaign.GameActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name="ca.ggolda.android_game_campaign.GameActivitySingle" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
 
+        <activity android:name="ca.ggolda.android_game_campaign.GameActivityOnline" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
 
 
     </application>

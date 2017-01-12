@@ -170,7 +170,7 @@ public class AdapterActive extends ArrayAdapter<InstanceGame> {
 
                     if ((current.getRed().equals(LobbyActivity.userId)) || (current.getBlue().equals(LobbyActivity.userId))) {
 
-                        Intent intent = new Intent(getContext(), GameActivity.class);
+                        Intent intent = new Intent(getContext(), GameActivityOnline.class);
                         intent.putExtra("MATCH_ID", current.getMatch_id());
                         getContext().startActivity(intent);
                     }

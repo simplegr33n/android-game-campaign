@@ -155,6 +155,16 @@ public class LobbyActivity extends AppCompatActivity {
         });
 
 
+        // create single player game
+        TextView singlePlayer = (TextView) findViewById(R.id.single_button);
+        singlePlayer.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // go to game
+                Intent intent = new Intent(LobbyActivity.this, GameActivitySingle.class);
+            //    intent.putExtra("MATCH_ID", offer);
+                startActivity(intent);
+            }
+        });
 
         //create a random game offer
         TextView matchRandom = (TextView) findViewById(R.id.random_button);
@@ -199,7 +209,7 @@ public class LobbyActivity extends AppCompatActivity {
                                         mGamesDatabaseReference.child("offers").removeValue();
 
                                         // go to game
-                                        Intent intent = new Intent(LobbyActivity.this, GameActivity.class);
+                                        Intent intent = new Intent(LobbyActivity.this, GameActivityOnline.class);
                                         intent.putExtra("MATCH_ID", offer);
                                         startActivity(intent);
                                     }
@@ -225,7 +235,7 @@ public class LobbyActivity extends AppCompatActivity {
                             mGamesDatabaseReference.child(eventId).child("username_red").setValue(username);
 
                             // go to game
-                            Intent intent = new Intent(LobbyActivity.this, GameActivity.class);
+                            Intent intent = new Intent(LobbyActivity.this, GameActivityOnline.class);
                             intent.putExtra("MATCH_ID", eventId);
                             startActivity(intent);
                         }

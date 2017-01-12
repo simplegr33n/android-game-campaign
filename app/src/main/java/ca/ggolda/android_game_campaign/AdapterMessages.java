@@ -31,25 +31,25 @@ public class AdapterMessages extends ArrayAdapter<InstanceMessage> {
 
         InstanceMessage message = getItem(position);
 
-        Log.e("Playaco", ""+GameActivity.playerColor);
+        Log.e("Playaco", ""+ GameActivityOnline.playerColor);
 
         // Set color of icone next to name in chat
         if (message.getName() != null) {
-            if (message.getName().equals(GameActivity.username)) {
-                if (GameActivity.playerColor.equals("red")) {
+            if (message.getName().equals(GameActivityOnline.username)) {
+                if (GameActivityOnline.playerColor.equals("red")) {
                     colorSide.setImageResource(R.drawable.red_none);
                     colorSide.setBackgroundColor(Color.parseColor("#FF0000"));
 
-                } else if (GameActivity.playerColor.equals("blue")) {
+                } else if (GameActivityOnline.playerColor.equals("blue")) {
                     colorSide.setImageResource(R.drawable.blue_none);
                     colorSide.setBackgroundColor(Color.parseColor("#0000FF"));
                 }
             } else {
-                if (GameActivity.playerColor.equals("red")) {
+                if (GameActivityOnline.playerColor.equals("red")) {
                     colorSide.setImageResource(R.drawable.blue_none);
                     colorSide.setBackgroundColor(Color.parseColor("#0000FF"));
 
-                } else if (GameActivity.playerColor.equals("blue")) {
+                } else if (GameActivityOnline.playerColor.equals("blue")) {
                     colorSide.setImageResource(R.drawable.red_none);
                     colorSide.setBackgroundColor(Color.parseColor("#FF0000"));
                 }

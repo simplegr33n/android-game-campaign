@@ -19,6 +19,7 @@
             android:src="@drawable/topo1"
             android:padding="4dp"
             android:scaleType="fitXY"
+            android:visibility="gone"
             android:background="#000000"/>
 
         <LinearLayout

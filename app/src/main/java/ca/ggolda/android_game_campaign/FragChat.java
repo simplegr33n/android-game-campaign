@@ -88,9 +88,9 @@ public class FragChat extends Fragment {
 
         mFirebaseDatabase = FirebaseDatabase.getInstance();
 
-        mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("messages").child(GameActivity.match_id);
+        mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("messages").child(GameActivityOnline.match_id);
 
-        mUsername = GameActivity.username;
+        mUsername = GameActivityOnline.username;
 
 
 

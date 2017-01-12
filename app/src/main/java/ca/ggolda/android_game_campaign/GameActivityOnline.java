@@ -8,7 +8,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -32,7 +31,7 @@ import java.util.Random;
  */
 
 
-public class GameActivity extends AppCompatActivity {
+public class GameActivityOnline extends AppCompatActivity {
 
     private ImageView a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16;
     private ImageView b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15, b16;
@@ -116,7 +115,7 @@ public class GameActivity extends AppCompatActivity {
                 if (user == null) {
                     // user auth state is changed - user is null
                     // launch login activity
-                    startActivity(new Intent(GameActivity.this, LoginActivity.class));
+                    startActivity(new Intent(GameActivityOnline.this, LoginActivity.class));
                     finish();
                 }
             }
@@ -620,65 +619,65 @@ public class GameActivity extends AppCompatActivity {
 
     private int getBackgroundColor(int c) {
 
-        int color = ContextCompat.getColor(GameActivity.this, R.color.boardColor1);
+        int color = ContextCompat.getColor(GameActivityOnline.this, R.color.boardColor1);
 
         switch (c) {
             case -2:
-                color = ContextCompat.getColor(GameActivity.this, R.color.boardColorBlue);
+                color = ContextCompat.getColor(GameActivityOnline.this, R.color.boardColorBlue);
                 break;
             case -1:
-                color = ContextCompat.getColor(GameActivity.this, R.color.boardColorRed);
+                color = ContextCompat.getColor(GameActivityOnline.this, R.color.boardColorRed);
                 break;
             case 0:
-                color = ContextCompat.getColor(GameActivity.this, R.color.boardColorBlack);
+                color = ContextCompat.getColor(GameActivityOnline.this, R.color.boardColorBlack);
                 break;
             case 1:
-                color = ContextCompat.getColor(GameActivity.this, R.color.boardColor1);
+                color = ContextCompat.getColor(GameActivityOnline.this, R.color.boardColor1);
                 break;
             case 2:
-                color = ContextCompat.getColor(GameActivity.this, R.color.boardColor2);
+                color = ContextCompat.getColor(GameActivityOnline.this, R.color.boardColor2);
                 break;
             case 3:
-                color = ContextCompat.getColor(GameActivity.this, R.color.boardColor3);
+                color = ContextCompat.getColor(GameActivityOnline.this, R.color.boardColor3);
                 break;
             case 4:
-                color = ContextCompat.getColor(GameActivity.this, R.color.boardColor4);
+                color = ContextCompat.getColor(GameActivityOnline.this, R.color.boardColor4);
                 break;
             case 5:
-                color = ContextCompat.getColor(GameActivity.this, R.color.boardColor5);
+                color = ContextCompat.getColor(GameActivityOnline.this, R.color.boardColor5);
                 break;
             case 6:
-                color = ContextCompat.getColor(GameActivity.this, R.color.boardColor6);
+                color = ContextCompat.getColor(GameActivityOnline.this, R.color.boardColor6);
                 break;
             case 7:
-                color = ContextCompat.getColor(GameActivity.this, R.color.boardColor7);
+                color = ContextCompat.getColor(GameActivityOnline.this, R.color.boardColor7);
                 break;
             case 8:
-                color = ContextCompat.getColor(GameActivity.this, R.color.boardColor8);
+                color = ContextCompat.getColor(GameActivityOnline.this, R.color.boardColor8);
                 break;
             case 9:
-                color = ContextCompat.getColor(GameActivity.this, R.color.boardColor9);
+                color = ContextCompat.getColor(GameActivityOnline.this, R.color.boardColor9);
                 break;
             case 10:
-                color = ContextCompat.getColor(GameActivity.this, R.color.boardColor10);
+                color = ContextCompat.getColor(GameActivityOnline.this, R.color.boardColor10);
                 break;
             case 11:
-                color = ContextCompat.getColor(GameActivity.this, R.color.boardColor11);
+                color = ContextCompat.getColor(GameActivityOnline.this, R.color.boardColor11);
                 break;
             case 12:
-                color = ContextCompat.getColor(GameActivity.this, R.color.boardColor12);
+                color = ContextCompat.getColor(GameActivityOnline.this, R.color.boardColor12);
                 break;
             case 13:
-                color = ContextCompat.getColor(GameActivity.this, R.color.boardColor13);
+                color = ContextCompat.getColor(GameActivityOnline.this, R.color.boardColor13);
                 break;
             case 14:
-                color = ContextCompat.getColor(GameActivity.this, R.color.boardColor14);
+                color = ContextCompat.getColor(GameActivityOnline.this, R.color.boardColor14);
                 break;
             case 15:
-                color = ContextCompat.getColor(GameActivity.this, R.color.boardColor15);
+                color = ContextCompat.getColor(GameActivityOnline.this, R.color.boardColor15);
                 break;
             case 16:
-                color = ContextCompat.getColor(GameActivity.this, R.color.boardColor16);
+                color = ContextCompat.getColor(GameActivityOnline.this, R.color.boardColor16);
                 break;
 
         }
