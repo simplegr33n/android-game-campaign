@@ -2,7 +2,10 @@
     <string name="app_name">Campaign</string>
 
     <string name="new_gameset">
-        red_none,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,red_none,free_square,free_square,free_square,free_square,free_square,
         free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
         free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
         free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
@@ -27,13 +30,10 @@
         free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
         free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
         free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
+        free_square,free_square,free_square,free_square,free_square,blue_none,free_square,free_square,
         free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
         free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
-        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
-        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
-        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
-        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square,
-        free_square,free_square,free_square,free_square,free_square,free_square,free_square,blue_none
+        free_square,free_square,free_square,free_square,free_square,free_square,free_square,free_square
     </string>
 
 

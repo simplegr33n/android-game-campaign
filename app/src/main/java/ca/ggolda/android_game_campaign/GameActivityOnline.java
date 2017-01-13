@@ -558,11 +558,16 @@ public class GameActivityOnline extends AppCompatActivity {
         gamesetList = Arrays.asList(gamesetString.split("\\s*,\\s*"));
 
         // For coloring starting positions
-        // TODO: this somewhere/somehow else probably
-        boardsetList.set(0, "-1");
-        boardsetList.set(255, "-2");
+        for (int i = 0; i < gamesetList.size(); i++) {
+            if (gamesetList.get(i).equals("red_none")) {
+                boardsetList.set(i, "-1");
+            } else if (gamesetList.get(i).equals("blue_none")) {
+                boardsetList.set(i, "-2");
+            }
+        }
 
-        checkWin();
+
+            checkWin();
 
         if (playerColor.equals("red") && turn.equals("red")) {
             for (int i = 0; i < gamesetList.size(); i++) {
