@@ -102,8 +102,6 @@ public class GameActivitySingle extends AppCompatActivity {
 
         gamesetString = getResources().getString(R.string.new_gameset);
 
-        Log.e("OHOHO", gamesetString + boardsetString);
-
         // Find imageviews
         declareBoard();
         setBoard();
@@ -1505,6 +1503,7 @@ public class GameActivitySingle extends AppCompatActivity {
         gamesetList.set(moveTo, selectedUnit);
         if (currentPosition != 999) {
             gamesetList.set(currentPosition, "free_square");
+            currentPosition = 999;
         }
 
 
@@ -1536,11 +1535,6 @@ public class GameActivitySingle extends AppCompatActivity {
         } else if (turn.equals("blue")){
             turn = "red";
         }
-
-
-        Log.e("OUO 9", gamesetString);
-        Log.e("OUO 10", boardsetString);
-
         // Clear selected which itself resets board
         clearSelected();
 
@@ -1810,11 +1804,11 @@ public class GameActivitySingle extends AppCompatActivity {
     private void fillSpiller(int square, int color) {
         // Set default setColor to black to make bugs obvious
         String setColor = "0";
-        ;
 
-        if (playerColor.equals("red")) {
+
+        if (turn.equals("red")) {
             setColor = "-1";
-        } else if (playerColor.equals("blue")) {
+        } else if (turn.equals("blue")) {
             setColor = "-2";
         }
 
@@ -1838,6 +1832,8 @@ public class GameActivitySingle extends AppCompatActivity {
 
     private void checkWin() {
         TextView displayResult = (TextView) findViewById(R.id.display_result);
+
+        gamesetList = Arrays.asList(gamesetString.split("\\s*,\\s*"));
 
         if (playerColor.equals("red")) {
             for (int i = 0; i < gamesetList.size(); i++) {
@@ -1878,12 +1874,15 @@ public class GameActivitySingle extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
 
+        finish();
+
     }
 
     @Override
     public void onPause() {
         super.onPause();
 
+        finish();
     }
 
     @Override
