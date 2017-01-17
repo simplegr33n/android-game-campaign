@@ -1466,7 +1466,10 @@ public class GameActivitySingle extends AppCompatActivity {
 
                 // send moveTo position and the color it was previously to fillSpiller method
                 setColor = "-1";
-                fillSpiller(moveTo, priorColor);
+                if (!(priorColor == Integer.valueOf(setColor))) {
+                    fillSpiller(moveTo, priorColor);
+                }
+
 
                 previousTurn = "red";
                 turn = "none";
@@ -1489,7 +1492,9 @@ public class GameActivitySingle extends AppCompatActivity {
 
                 // send moveTo position and the color it was previously to fillSpiller method
                 setColor = "-2";
-                fillSpiller(moveTo, priorColor);
+                if (!(priorColor == Integer.valueOf(setColor))) {
+                    fillSpiller(moveTo, priorColor);
+                }
 
 
                 previousTurn = "blue";
@@ -1822,22 +1827,22 @@ public class GameActivitySingle extends AppCompatActivity {
 
     private void fillSpiller(int square, int color) {
 
-        if (Integer.valueOf(boardsetList.get(upOne(square))) == color) {
-            boardsetList.set(upOne(square), setColor);
-            fillSpiller(upOne(square), color);
-        }
-        if (Integer.valueOf(boardsetList.get(downOne(square))) == color) {
-            boardsetList.set(downOne(square), setColor);
-            fillSpiller(downOne(square), color);
-        }
-        if (Integer.valueOf(boardsetList.get(leftOne(square))) == color) {
-            boardsetList.set(leftOne(square), setColor);
-            fillSpiller(leftOne(square), color);
-        }
-        if (Integer.valueOf(boardsetList.get(rightOne(square))) == color) {
-            boardsetList.set(rightOne(square), setColor);
-            fillSpiller(rightOne(square), color);
-        }
+            if (Integer.valueOf(boardsetList.get(upOne(square))) == color) {
+                boardsetList.set(upOne(square), setColor);
+                fillSpiller(upOne(square), color);
+            }
+            if (Integer.valueOf(boardsetList.get(downOne(square))) == color) {
+                boardsetList.set(downOne(square), setColor);
+                fillSpiller(downOne(square), color);
+            }
+            if (Integer.valueOf(boardsetList.get(leftOne(square))) == color) {
+                boardsetList.set(leftOne(square), setColor);
+                fillSpiller(leftOne(square), color);
+            }
+            if (Integer.valueOf(boardsetList.get(rightOne(square))) == color) {
+                boardsetList.set(rightOne(square), setColor);
+                fillSpiller(rightOne(square), color);
+            }
 
     }
 
