@@ -402,7 +402,7 @@ public class GameActivitySingle extends AppCompatActivity {
 
         checkWin();
 
-        if (playerColor.equals("red") && turn.equals("red")) {
+        if (playerColor.equals("red")) {
             for (int i = 0; i < gamesetList.size(); i++) {
                 if (gamesetList.get(i).equals("red_none")) {
                     final int localI = i;
@@ -414,24 +414,12 @@ public class GameActivitySingle extends AppCompatActivity {
                 }
 
             }
-        } else if (playerColor.equals("blue") && turn.equals("blue")) {
-            for (int i = 0; i < gamesetList.size(); i++) {
-                if (gamesetList.get(i).equals("blue_none")) {
-                    final int localI = i;
-                    getSquareImageView(i).setOnClickListener(new View.OnClickListener() {
-                        public void onClick(View v) {
-                            onSelected(localI);
-                        }
-                    });
-                }
 
-            }
         } else {
             // TODO: COMPUTER MOVES HERE I THINK
             //
 
             Log.e("GameActivitySingle", "I M Computa");
-
 
             for (int i = 0; i < gamesetList.size(); i++) {
                 if (gamesetList.get(i).equals("blue_none")) {
@@ -439,38 +427,37 @@ public class GameActivitySingle extends AppCompatActivity {
                     Log.e("Computa", "" + gamesetList.get(i));
 
                     currentPosition = i;
-                    selectedUnit = "blue_none";
+                    selectedUnit = gamesetList.get(i);
 
-                    Log.e("Computa", "DownOne" + downOne(currentPosition));
-                    Log.e("Computa", "upOne" + upOne(currentPosition));
+                    Random compRand = new Random();
 
-                    Random r = new Random();
+                    int computerPath = compRand.nextInt(5 - 1) + 1;
 
-
-
-                    int computerPath = r.nextInt(5 - 1) + 1;
-
-                    Log.e("Computa", "Random" + computerPath);
-
-                    Log.e("Computa", "computerPath" + computerPath);
-
+                    Log.e("Computa", "computerPath " + computerPath);
 
                     switch (computerPath) {
                         case 1:
-                            moveTo(upOne(i));
+                            Log.e("Computa", "upOne " + upOne(currentPosition));
+
+                            moveTo(upOne(currentPosition));
                             break;
                         case 2:
-                            moveTo(downOne(i));
+                            Log.e("Computa", "downOne " + downOne(currentPosition));
+
+                            moveTo(downOne(currentPosition));
                             break;
                         case 3:
-                            moveTo(rightOne(i));
+                            Log.e("Computa", "rightOne " + rightOne(currentPosition));
+
+                            moveTo(rightOne(currentPosition));
                             break;
                         case 4:
-                            moveTo(leftOne(i));
+                            Log.e("Computa", "leftOne " + leftOne(currentPosition));
+
+                            moveTo(leftOne(currentPosition));
                             break;
                     }
                 }
-
             }
         }
 
@@ -1453,9 +1440,9 @@ public class GameActivitySingle extends AppCompatActivity {
 
     private void moveTo(int moveTo) {
 
-        Log.e("OUO CP", " " + currentPosition);
-        Log.e("OUO M2", " " + moveTo);
-        Log.e("OUO SU", " " + selectedUnit);
+        Log.e("moveTo selectedUnit", " " + selectedUnit);
+        Log.e("moveTo currentPosition", " " + currentPosition);
+        Log.e("moveTo moveTo", " " + moveTo);
 
         ImageView space = getSquareImageView(moveTo);
         ImageView fromView = getSquareImageView(currentPosition);
@@ -1474,8 +1461,11 @@ public class GameActivitySingle extends AppCompatActivity {
                 boardsetList.set(moveTo, "-1");
                 boardsetList.set(currentPosition, "-1");
 
+                turn = "blue";
                 // send moveTo position and the color it was previously to fillSpiller method
-                fillSpiller(moveTo, priorColor);
+                fillSpiller(moveTo, priorColor, 1);
+
+
 
             }
             space.setBackgroundColor(Color.parseColor("#FF0000"));
@@ -1494,8 +1484,11 @@ public class GameActivitySingle extends AppCompatActivity {
                 boardsetList.set(currentPosition, "-2");
 
 
+                turn = "red";
                 // send moveTo position and the color it was previously to fillSpiller method
-                fillSpiller(moveTo, priorColor);
+                fillSpiller(moveTo, priorColor, 2);
+
+
             }
             space.setBackgroundColor(Color.parseColor("#0000FF"));
             fromView.setImageResource(R.drawable.free_square);
@@ -1533,12 +1526,6 @@ public class GameActivitySingle extends AppCompatActivity {
             }
         }
 
-        // change turn
-        if (turn.equals("red")){
-            turn = "blue";
-        } else if (turn.equals("blue")){
-            turn = "red";
-        }
         // Clear selected which itself resets board
         clearSelected();
 
@@ -1805,32 +1792,31 @@ public class GameActivitySingle extends AppCompatActivity {
     }
 
     //TODO: Fix StackOverflowError
-    private void fillSpiller(int square, int color) {
+    private void fillSpiller(int square, int color, int red_or_blue) {
         // Set default setColor to black to make bugs obvious
         String setColor = "0";
 
-
-        if (turn.equals("red")) {
+        if (red_or_blue == 1) {
             setColor = "-1";
-        } else if (turn.equals("blue")) {
+        } else if (red_or_blue == 2) {
             setColor = "-2";
         }
 
         if (Integer.valueOf(boardsetList.get(upOne(square))) == color) {
             boardsetList.set(upOne(square), setColor);
-            fillSpiller(upOne(square), color);
+            fillSpiller(upOne(square), color, red_or_blue);
         }
         if (Integer.valueOf(boardsetList.get(downOne(square))) == color) {
             boardsetList.set(downOne(square), setColor);
-            fillSpiller(downOne(square), color);
+            fillSpiller(downOne(square), color, red_or_blue);
         }
         if (Integer.valueOf(boardsetList.get(leftOne(square))) == color) {
             boardsetList.set(leftOne(square), setColor);
-            fillSpiller(leftOne(square), color);
+            fillSpiller(leftOne(square), color, red_or_blue);
         }
         if (Integer.valueOf(boardsetList.get(rightOne(square))) == color) {
             boardsetList.set(rightOne(square), setColor);
-            fillSpiller(rightOne(square), color);
+            fillSpiller(rightOne(square), color, red_or_blue);
         }
     }
 
