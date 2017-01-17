@@ -464,7 +464,7 @@ public class AdapterActive extends ArrayAdapter<InstanceGame> {
 
     private void setBoard() {
 
-        Log.e("BSSTring", ""+boardsetString);
+        Log.e("AdapterActive", "setBoard()");
 
         boardsetList = Arrays.asList(boardsetString.split("\\s*,\\s*"));
         gamesetList = Arrays.asList(gamesetString.split("\\s*,\\s*"));

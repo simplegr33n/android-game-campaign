@@ -49,6 +49,8 @@ public class GameActivitySingle extends AppCompatActivity {
     private List<String> boardsetList;
     private String boardsetString = "";
 
+    private String previousTurn;
+
     private float x1, x2;
     static final int MIN_DISTANCE = 150; //TODO: figure this one out
 
@@ -390,74 +392,45 @@ public class GameActivitySingle extends AppCompatActivity {
         boardsetList = Arrays.asList(boardsetString.split("\\s*,\\s*"));
         gamesetList = Arrays.asList(gamesetString.split("\\s*,\\s*"));
 
-        // For coloring starting positions
-        for (int i = 0; i < gamesetList.size(); i++) {
-            if (gamesetList.get(i).equals("red_none")) {
-                boardsetList.set(i, "-1");
-            } else if (gamesetList.get(i).equals("blue_none")) {
-                boardsetList.set(i, "-2");
-            }
-
-        }
-
         checkWin();
 
-        if (playerColor.equals("red") && turn.equals("red")) {
-            for (int i = 0; i < gamesetList.size(); i++) {
-                if (gamesetList.get(i).equals("red_none")) {
-                    final int localI = i;
+        // For coloring starting positions
+        for (int i = 0; i < gamesetList.size(); i++) {
+            if (gamesetList.get(i).equals("red_none") && turn.equals("red")) {
+                boardsetList.set(i, "-1");
+                currentPosition = i;
+                if (playerColor.equals("red")) {
                     getSquareImageView(i).setOnClickListener(new View.OnClickListener() {
                         public void onClick(View v) {
-                            onSelected(localI);
+                            onSelected(currentPosition);
                         }
                     });
+                } else {
+//                    justClear();
                 }
 
-            }
+            } else if (gamesetList.get(i).equals("blue_none") && turn.equals("blue")) {
+                boardsetList.set(i, "-2");
+                currentPosition = i;
+                selectedUnit = gamesetList.get(i);
 
-        } else {
-            // TODO: COMPUTER MOVES HERE I THINK
-            //
+//                //tODO: computer auto turn
+//                Log.e("GameActivitySingle", "auto-return turn to RED (for now...)");
+//
 
-            Log.e("GameActivitySingle", "I M Computa");
+                computerMove();
+                turn = "red";
+                clearSelected();
 
-            for (int i = 0; i < gamesetList.size(); i++) {
-                if (gamesetList.get(i).equals("blue_none")) {
 
-                    Log.e("Computa", "" + gamesetList.get(i));
+            } else if (gamesetList.get(i).equals("blue_none")) {
 
-                    currentPosition = i;
-                    selectedUnit = gamesetList.get(i);
+                boardsetList.set(i, "-2");
 
-                    Random compRand = new Random();
+            } else if (gamesetList.get(i).equals("red_none")) {
 
-                    int computerPath = compRand.nextInt(5 - 1) + 1;
+                boardsetList.set(i, "-1");
 
-                    Log.e("Computa", "computerPath " + computerPath);
-
-                    switch (computerPath) {
-                        case 1:
-                            Log.e("Computa", "upOne " + upOne(currentPosition));
-
-                            moveTo(upOne(currentPosition));
-                            break;
-                        case 2:
-                            Log.e("Computa", "downOne " + downOne(currentPosition));
-
-                            moveTo(downOne(currentPosition));
-                            break;
-                        case 3:
-                            Log.e("Computa", "rightOne " + rightOne(currentPosition));
-
-                            moveTo(rightOne(currentPosition));
-                            break;
-                        case 4:
-                            Log.e("Computa", "leftOne " + leftOne(currentPosition));
-
-                            moveTo(leftOne(currentPosition));
-                            break;
-                    }
-                }
             }
         }
 
@@ -482,6 +455,34 @@ public class GameActivitySingle extends AppCompatActivity {
 
                 }
             }
+        }
+
+    }
+
+    private void computerMove() {
+
+        //TODO: below as async task then return clear selected after completion
+
+        Random compRand = new Random();
+        int computerPath = compRand.nextInt(5 - 1) + 1;
+
+        switch (computerPath) {
+            case 1:
+                Log.e("Computa", "computerPath (" + currentPosition + ") UP to (" + upOne(currentPosition) + ")");
+                moveTo(upOne(currentPosition));
+                break;
+            case 2:
+                moveTo(downOne(currentPosition));
+                Log.e("Computa", "computerPath (" + currentPosition + ") DOWN to (" + downOne(currentPosition) + ")");
+                break;
+            case 3:
+                moveTo(rightOne(currentPosition));
+                Log.e("Computa", "computerPath (" + currentPosition + ") RIGHT to (" + rightOne(currentPosition) + ")");
+                break;
+            case 4:
+                moveTo(leftOne(currentPosition));
+                Log.e("Computa", "computerPath (" + currentPosition + ") LEFT to (" + leftOne(currentPosition) + ")");
+                break;
         }
 
     }
@@ -1440,9 +1441,7 @@ public class GameActivitySingle extends AppCompatActivity {
 
     private void moveTo(int moveTo) {
 
-        Log.e("moveTo selectedUnit", " " + selectedUnit);
-        Log.e("moveTo currentPosition", " " + currentPosition);
-        Log.e("moveTo moveTo", " " + moveTo);
+        Log.e("GameActivitySingle", "previousPosition: " + currentPosition + ", selectedUnit: " + selectedUnit + ", moveTo: " + moveTo);
 
         ImageView space = getSquareImageView(moveTo);
         ImageView fromView = getSquareImageView(currentPosition);
@@ -1461,11 +1460,11 @@ public class GameActivitySingle extends AppCompatActivity {
                 boardsetList.set(moveTo, "-1");
                 boardsetList.set(currentPosition, "-1");
 
-                turn = "blue";
                 // send moveTo position and the color it was previously to fillSpiller method
                 fillSpiller(moveTo, priorColor, 1);
 
-
+                previousTurn = "red";
+                turn = "none";
 
             }
             space.setBackgroundColor(Color.parseColor("#FF0000"));
@@ -1483,18 +1482,17 @@ public class GameActivitySingle extends AppCompatActivity {
                 boardsetList.set(moveTo, "-2");
                 boardsetList.set(currentPosition, "-2");
 
-
-                turn = "red";
                 // send moveTo position and the color it was previously to fillSpiller method
                 fillSpiller(moveTo, priorColor, 2);
 
 
+                previousTurn = "blue";
+                turn = "none";
             }
             space.setBackgroundColor(Color.parseColor("#0000FF"));
             fromView.setImageResource(R.drawable.free_square);
 
         }
-
 
         // set in gamesetList
         gamesetList.set(moveTo, selectedUnit);
@@ -1526,7 +1524,18 @@ public class GameActivitySingle extends AppCompatActivity {
             }
         }
 
-        // Clear selected which itself resets board
+        if (previousTurn.equals("red")) {
+            // change turn
+            turn = "blue";
+            previousTurn = null;
+            Log.e("GameActivitySingle", "Set turn: " + turn);
+        } else if (previousTurn.equals("blue")) {
+            // change turn
+            turn = "red";
+            previousTurn = null;
+            Log.e("GameActivitySingle", "Set turn: " + turn);
+        }
+
         clearSelected();
 
     }
@@ -1545,6 +1554,20 @@ public class GameActivitySingle extends AppCompatActivity {
 
         // Reset board
         setBoard();
+    }
+
+    private void justClear() {
+        selectedUnit = "";
+        currentPosition = 999;
+
+        // null onclick listeners
+        for (int i = 0; i < 256; i++) {
+            //If not a game piece and your turn, setOnclick null
+
+            ImageView iView = getSquareImageView(i);
+            iView.setOnClickListener(null);
+        }
+
     }
 
     private int upOne(int here) {
@@ -1791,16 +1814,10 @@ public class GameActivitySingle extends AppCompatActivity {
         return right;
     }
 
-    //TODO: Fix StackOverflowError
+    //TODO: Fix StackOverflowError - seems potentially related to backtracking in the game
     private void fillSpiller(int square, int color, int red_or_blue) {
         // Set default setColor to black to make bugs obvious
         String setColor = "0";
-
-        if (red_or_blue == 1) {
-            setColor = "-1";
-        } else if (red_or_blue == 2) {
-            setColor = "-2";
-        }
 
         if (Integer.valueOf(boardsetList.get(upOne(square))) == color) {
             boardsetList.set(upOne(square), setColor);
@@ -1818,6 +1835,7 @@ public class GameActivitySingle extends AppCompatActivity {
             boardsetList.set(rightOne(square), setColor);
             fillSpiller(rightOne(square), color, red_or_blue);
         }
+
     }
 
     private void checkWin() {
