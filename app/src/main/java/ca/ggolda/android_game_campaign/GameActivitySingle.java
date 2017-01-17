@@ -402,7 +402,7 @@ public class GameActivitySingle extends AppCompatActivity {
 
         checkWin();
 
-        if (playerColor.equals("red")) {
+        if (playerColor.equals("red") && turn.equals("red")) {
             for (int i = 0; i < gamesetList.size(); i++) {
                 if (gamesetList.get(i).equals("red_none")) {
                     final int localI = i;
