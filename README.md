@@ -22,13 +22,11 @@ https://play.google.com/store/apps/details?id=ca.ggolda.android_game_campaign
 * Center-Focus & Zoom (7x7) 
 * Fog-of-War
 * Random Drops (Power-ups and Structures)
-* Singleplayer/Computer Auto-Movement
+* Strategic Computer Auto-Movement
 * Special rules for certain terrain (Water/Mountains)
 * Some rules for procedural board generation
 * Allow board generation from bitmaps
 
-### Bugs
-* fillSpiller() sometimes causing StackOverflowError
 
 
 
