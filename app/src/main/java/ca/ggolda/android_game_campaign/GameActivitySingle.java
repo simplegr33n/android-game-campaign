@@ -395,67 +395,69 @@ public class GameActivitySingle extends AppCompatActivity {
         boardsetList = Arrays.asList(boardsetString.split("\\s*,\\s*"));
         gamesetList = Arrays.asList(gamesetString.split("\\s*,\\s*"));
 
-        checkWin();
+        // if win conditions not met
+        if (!checkWin()) {
 
-        // For coloring starting positions
-        for (int i = 0; i < gamesetList.size(); i++) {
-            if (gamesetList.get(i).equals("red_none") && turn.equals("red")) {
-                boardsetList.set(i, "-1");
-                currentPosition = i;
-                if (playerColor.equals("red")) {
-                    getSquareImageView(i).setOnClickListener(new View.OnClickListener() {
-                        public void onClick(View v) {
-                            onSelected(currentPosition);
-                        }
-                    });
-                } else {
+            // For coloring starting positions
+            for (int i = 0; i < gamesetList.size(); i++) {
+                if (gamesetList.get(i).equals("red_none") && turn.equals("red")) {
+                    boardsetList.set(i, "-1");
+                    currentPosition = i;
+                    if (playerColor.equals("red")) {
+                        getSquareImageView(i).setOnClickListener(new View.OnClickListener() {
+                            public void onClick(View v) {
+                                onSelected(currentPosition);
+                            }
+                        });
+                    } else {
 //                    justClear();
-                }
+                    }
 
-            } else if (gamesetList.get(i).equals("blue_none") && turn.equals("blue")) {
-                boardsetList.set(i, "-2");
-                currentPosition = i;
-                selectedUnit = gamesetList.get(i);
+                } else if (gamesetList.get(i).equals("blue_none") && turn.equals("blue")) {
+                    boardsetList.set(i, "-2");
+                    currentPosition = i;
+                    selectedUnit = gamesetList.get(i);
 
 //                //tODO: computer auto turn
 //                Log.e("GameActivitySingle", "auto-return turn to RED (for now...)");
 //
 
-                computerMove();
-                turn = "red";
-                clearSelected();
+                    computerMove();
+                    turn = "red";
+                    clearSelected();
 
 
-            } else if (gamesetList.get(i).equals("blue_none")) {
+                } else if (gamesetList.get(i).equals("blue_none")) {
 
-                boardsetList.set(i, "-2");
+                    boardsetList.set(i, "-2");
 
-            } else if (gamesetList.get(i).equals("red_none")) {
+                } else if (gamesetList.get(i).equals("red_none")) {
 
-                boardsetList.set(i, "-1");
+                    boardsetList.set(i, "-1");
 
-            }
-        }
-
-
-        //set board color based on boardsetList
-        for (int i = 0; i < boardsetList.size(); i++) {
-
-            int color;
-
-            if (!(boardsetList.get(i).equals(""))) {
-                color = getBackgroundColor(Integer.valueOf(boardsetList.get(i)));
-            } else {
-                color = Color.parseColor("#000000");
+                }
             }
 
-            if (getSquareImageView(i) != null) {
-                getSquareImageView(i).setBackgroundColor(color);
 
-                // if gameset not null or freespace, then draw the sprite
-                if (!((gamesetList == null) || (gamesetList.get(i).equals("free_space")))) {
-                    getSquareImageView(i).setImageResource(getResources().getIdentifier(gamesetList.get(i), "drawable", getPackageName()));
+            //set board color based on boardsetList
+            for (int i = 0; i < boardsetList.size(); i++) {
 
+                int color;
+
+                if (!(boardsetList.get(i).equals(""))) {
+                    color = getBackgroundColor(Integer.valueOf(boardsetList.get(i)));
+                } else {
+                    color = Color.parseColor("#000000");
+                }
+
+                if (getSquareImageView(i) != null) {
+                    getSquareImageView(i).setBackgroundColor(color);
+
+                    // if gameset not null or freespace, then draw the sprite
+                    if (!((gamesetList == null) || (gamesetList.get(i).equals("free_space")))) {
+                        getSquareImageView(i).setImageResource(getResources().getIdentifier(gamesetList.get(i), "drawable", getPackageName()));
+
+                    }
                 }
             }
         }
@@ -1567,20 +1569,6 @@ public class GameActivitySingle extends AppCompatActivity {
         setBoard();
     }
 
-    private void justClear() {
-        selectedUnit = "";
-        currentPosition = 999;
-
-        // null onclick listeners
-        for (int i = 0; i < 256; i++) {
-            //If not a game piece and your turn, setOnclick null
-
-            ImageView iView = getSquareImageView(i);
-            iView.setOnClickListener(null);
-        }
-
-    }
-
     private int upOne(int here) {
         int up = 0;
 
@@ -1846,10 +1834,12 @@ public class GameActivitySingle extends AppCompatActivity {
 
     }
 
-    private void checkWin() {
+    private boolean checkWin() {
         TextView displayResult = (TextView) findViewById(R.id.display_result);
 
         gamesetList = Arrays.asList(gamesetString.split("\\s*,\\s*"));
+
+        boolean won = false;
 
         if (playerColor.equals("red")) {
             for (int i = 0; i < gamesetList.size(); i++) {
@@ -1858,11 +1848,15 @@ public class GameActivitySingle extends AppCompatActivity {
                     displayResult.setBackgroundColor(Color.parseColor("#6EECC485"));
                     displayResult.setVisibility(View.VISIBLE);
 
+                    won = true;
+
                 }
                 if (gamesetList.get(i).equals("blue_none") && (boardsetList.get(i).equals("-1"))) {
                     displayResult.setText("You Win!");
                     displayResult.setBackgroundColor(Color.parseColor("#6Ea1e9a1"));
                     displayResult.setVisibility(View.VISIBLE);
+
+                    won = true;
 
                 }
             }
@@ -1875,15 +1869,20 @@ public class GameActivitySingle extends AppCompatActivity {
                     displayResult.setBackgroundColor(Color.parseColor("#6EECC485"));
                     displayResult.setVisibility(View.VISIBLE);
 
+                    won = true;
+
                 }
                 if (gamesetList.get(i).equals("red_none") && (boardsetList.get(i).equals("-2"))) {
                     displayResult.setText("You Win!");
                     displayResult.setBackgroundColor(Color.parseColor("#6Ea1e9a1"));
                     displayResult.setVisibility(View.VISIBLE);
 
+                    won = true;
+
                 }
             }
         }
+        return won;
     }
 
     @Override

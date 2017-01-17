@@ -11,163 +11,182 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!-- top bar -->
 
-
-        <LinearLayout
-            android:id="@+id/topbar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#434548"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2"
-                    android:background="@color/brandRed"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginBottom="2dp"
-                    android:layout_marginLeft="2dp">
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/brandRed"
-                        android:gravity="center">
-
-                        <TextView
-                            android:id="@+id/username_left"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@color/brandRed"
-                            android:gravity="center"
-                            android:padding="8dp"
-                            android:textColor="#FFFFFF"
-                            android:textSize="32sp"
-                            android:textStyle="bold"
-                            tools:text="Usernvn" />
-
-                        <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:src="@drawable/blue_shelter" />
-
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="0dp"
-                        android:text="0:0"
-                        android:textColor="#4d4d51"
-                        android:textSize="24sp"
-                        android:textStyle="bold" />
-
-
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="3"
-                    android:orientation="vertical"
-                    android:paddingLeft="2dp"
-                    android:paddingBottom="2dp"
-                    android:paddingTop="2dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:background="#FFFFFF"
-                        android:layout_marginBottom="2dp">
-
-                        <TextView
-                            android:id="@+id/single_button"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@color/brandBlue"
-                            android:gravity="center"
-                            android:padding="8dp"
-                            android:text="SINGLE PLAYER"
-                            android:textColor="#ffffff"
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
-
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:background="#FFFFFF">
-
-                        <TextView
-                            android:id="@+id/random_button"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@color/brandBlue"
-                            android:gravity="center"
-                            android:text="MATCH RANDOM"
-                            android:textColor="#ffffff"
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/active_count"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:gravity="center"
-                android:text="Active Games (#)"
-                android:background="#FFFFFF"
-                android:textColor="#434548"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:visibility="gone"
-                tools:visibility="visible" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="#425777" />
-
-        </LinearLayout>
-
-        <!-- listView -->
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/topbar"
-            android:background="#000"
             android:orientation="vertical">
 
-            <ListView
-                android:id="@+id/active_listview"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/brandBlue"
-                android:paddingLeft="4dp"
-                android:paddingRight="4dp" />
 
+            <!-- top bar -->
+            <LinearLayout
+                android:id="@+id/topbar"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:orientation="vertical"
+                android:elevation="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="#434548"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginLeft="2dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_weight="2"
+                        android:background="@color/brandRed"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/brandRed"
+                            android:gravity="center">
+
+                            <TextView
+                                android:id="@+id/username_left"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@color/brandRed"
+                                android:gravity="center"
+                                android:padding="8dp"
+                                android:textColor="#FFFFFF"
+                                android:textSize="32sp"
+                                android:textStyle="bold"
+                                tools:text="Usernvn" />
+
+                            <ImageView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:src="@drawable/blue_shelter" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="0dp"
+                            android:text="0:0"
+                            android:textColor="#4d4d51"
+                            android:textSize="24sp"
+                            android:textStyle="bold" />
+
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3"
+                        android:orientation="vertical"
+                        android:paddingBottom="2dp"
+                        android:paddingLeft="2dp"
+                        android:paddingTop="2dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginBottom="2dp"
+                            android:layout_weight="1"
+                            android:background="#FFFFFF">
+
+                            <TextView
+                                android:id="@+id/single_button"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@color/brandBlue"
+                                android:gravity="center"
+                                android:padding="8dp"
+                                android:text="SINGLE PLAYER"
+                                android:textColor="#ffffff"
+                                android:textSize="12sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:background="#FFFFFF">
+
+                            <TextView
+                                android:id="@+id/random_button"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@color/brandBlue"
+                                android:gravity="center"
+                                android:text="MATCH RANDOM"
+                                android:textColor="#ffffff"
+                                android:textSize="12sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/active_count"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:background="#FFFFFF"
+                    android:gravity="center"
+                    android:text="Active Games (#)"
+                    android:textColor="#434548"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:visibility="gone"
+                    tools:visibility="visible" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#425777" />
+
+            </LinearLayout>
+
+            <!-- listView -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3"
+                android:layout_below="@id/topbar"
+                android:background="#000"
+                android:orientation="vertical">
+
+                <ListView
+                    android:id="@+id/active_listview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/lightBlue"
+                    android:paddingLeft="4dp"
+                    android:paddingRight="4dp" />
+
+
+            </LinearLayout>
+
+            <View
+                android:elevation="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.5"
+                android:background="@color/brandRed"/>
 
         </LinearLayout>
 
