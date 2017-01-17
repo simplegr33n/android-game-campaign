@@ -51,6 +51,9 @@ public class GameActivitySingle extends AppCompatActivity {
 
     private String previousTurn;
 
+    // set black to detect bugs
+    private String setColor = "0";
+
     private float x1, x2;
     static final int MIN_DISTANCE = 150; //TODO: figure this one out
 
@@ -1460,8 +1463,10 @@ public class GameActivitySingle extends AppCompatActivity {
                 boardsetList.set(moveTo, "-1");
                 boardsetList.set(currentPosition, "-1");
 
+
                 // send moveTo position and the color it was previously to fillSpiller method
-                fillSpiller(moveTo, priorColor, 1);
+                setColor = "-1";
+                fillSpiller(moveTo, priorColor);
 
                 previousTurn = "red";
                 turn = "none";
@@ -1483,7 +1488,8 @@ public class GameActivitySingle extends AppCompatActivity {
                 boardsetList.set(currentPosition, "-2");
 
                 // send moveTo position and the color it was previously to fillSpiller method
-                fillSpiller(moveTo, priorColor, 2);
+                setColor = "-2";
+                fillSpiller(moveTo, priorColor);
 
 
                 previousTurn = "blue";
@@ -1814,26 +1820,23 @@ public class GameActivitySingle extends AppCompatActivity {
         return right;
     }
 
-    //TODO: Fix StackOverflowError - seems potentially related to backtracking in the game
-    private void fillSpiller(int square, int color, int red_or_blue) {
-        // Set default setColor to black to make bugs obvious
-        String setColor = "0";
+    private void fillSpiller(int square, int color) {
 
         if (Integer.valueOf(boardsetList.get(upOne(square))) == color) {
             boardsetList.set(upOne(square), setColor);
-            fillSpiller(upOne(square), color, red_or_blue);
+            fillSpiller(upOne(square), color);
         }
         if (Integer.valueOf(boardsetList.get(downOne(square))) == color) {
             boardsetList.set(downOne(square), setColor);
-            fillSpiller(downOne(square), color, red_or_blue);
+            fillSpiller(downOne(square), color);
         }
         if (Integer.valueOf(boardsetList.get(leftOne(square))) == color) {
             boardsetList.set(leftOne(square), setColor);
-            fillSpiller(leftOne(square), color, red_or_blue);
+            fillSpiller(leftOne(square), color);
         }
         if (Integer.valueOf(boardsetList.get(rightOne(square))) == color) {
             boardsetList.set(rightOne(square), setColor);
-            fillSpiller(rightOne(square), color, red_or_blue);
+            fillSpiller(rightOne(square), color);
         }
 
     }
