@@ -24,7 +24,7 @@
                 android:id="@+id/topbar"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:layout_weight="2"
+                android:layout_weight="1"
                 android:orientation="vertical"
                 android:elevation="8dp">
 
@@ -140,18 +140,6 @@
 
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/active_count"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:background="#FFFFFF"
-                    android:gravity="center"
-                    android:text="Active Games (#)"
-                    android:textColor="#434548"
-                    android:textSize="24sp"
-                    android:textStyle="bold"
-                    android:visibility="gone"
-                    tools:visibility="visible" />
 
                 <View
                     android:layout_width="match_parent"
@@ -181,12 +169,27 @@
 
             </LinearLayout>
 
-            <View
+            <LinearLayout
                 android:elevation="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="0.5"
-                android:background="@color/brandRed"/>
+                android:gravity="center"
+                android:background="@color/brandRed">
+
+                <TextView
+                    android:id="@+id/active_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Active Games (#)"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:visibility="gone"
+                    tools:visibility="visible" />
+
+            </LinearLayout>
 
         </LinearLayout>
 

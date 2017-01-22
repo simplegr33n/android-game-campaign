@@ -1790,7 +1790,7 @@ public class GameActivityOnline extends AppCompatActivity {
                 down = 9;
                 break;
             case 250:
-                down = 0;
+                down = 10;
                 break;
             case 251:
                 down = 11;
