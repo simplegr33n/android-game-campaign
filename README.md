@@ -1,10 +1,14 @@
 # <img src="https://github.com/simplegr33n/android-game-assimilate/blob/master/screenshots/logos/logo1.jpg" width="32"> Android Campaign
 
 ## Screenshots
+
+<p align="center">
 <img src="https://github.com/simplegr33n/android-game-assimilate/blob/master/screenshots/phone0007.jpg" width="144">
 <img src="https://github.com/simplegr33n/android-game-assimilate/blob/master/screenshots/phone0005.jpg" width="144">
 <img src="https://github.com/simplegr33n/android-game-assimilate/blob/master/screenshots/tablet0008.jpg" width="160">
 <img src="https://github.com/simplegr33n/android-game-assimilate/blob/master/screenshots/tablet0007.jpg" width="160">
+</p>
+
 
 ## Power-Ups
 ### <img src="https://github.com/simplegr33n/android-game-campaign/blob/master/app/src/main/res/drawable/free_shelter.png" width="32"> Shelter

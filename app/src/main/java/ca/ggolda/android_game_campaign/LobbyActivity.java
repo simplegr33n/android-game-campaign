@@ -226,6 +226,7 @@ public class LobbyActivity extends AppCompatActivity {
                             String eventId = mGamesDatabaseReference.push().getKey();
 
                             //TODO: ensure these all happen
+                            // TODO: 04/15/17 update -- push these as objects so as to do less value setting...
                             mGamesDatabaseReference.child(eventId).child("red").setValue(userId);
                             mGamesDatabaseReference.child(eventId).child("turn_color").setValue("red");
                             mUsersDatabaseReference.child(userId).child("games").child(eventId).setValue(true);
